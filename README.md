@@ -2,6 +2,8 @@
 
 ## Palvelu drinkkireseptien hakemiseen
 
+[Demo drinkkiarkistosta](https://drinkarchive.herokuapp.com/)
+
 Drinkkireseptit kuvaavat cocktaileja ja muita juomasekoituksia. Reseptejä voi hakea juoman nimeen liittyvällä hakusanalla, jonkin ainesosan tai drinkin tyypin (alkudrinkki, cocktail, shotti,jne) mukaan. Reseptejä voi tarkastella myös listana, aakkosjärjestyksen, ainesosan tai juoman tyypin mukaan. 
 
 Juomia hakiessa samalla hakusanalla voi saada useita eri tuloksia tai samaan juomaan voidaan viitata usealla hakusanalla. Jokaiseen drinkkiin voi viitata yksi tai useampi avainsana, esimerkiksi jos drinkki on tunnettu usealla nimellä, voi muut nimet olla drinkin avainsanoina. 
