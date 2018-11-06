@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Drink</th>
+      <th></th>
+    </tr>
+    {% for drink in drinks %}
+    <tr>
+      <td>{{ drink.name }}</td>
+      <td><a href="{{url_for('drinks_edit', drink_id=drink.id)}}"><button>Muokkaa</button></a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p><a href="/drinks/new">Lisää uusi drinkki</a></p>
+{% endblock %}

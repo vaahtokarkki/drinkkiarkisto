@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('ingredients_create') }}">
+  <input type="text" name="name" placeholder="Nimi"/>
+  <input type="text" name="unit" placeholder="Ykiskkö"/>
+  <input type="submit" value="Lisää ainesosa"/>
+</form>
+{% endblock %}
