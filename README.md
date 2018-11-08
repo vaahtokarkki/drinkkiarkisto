@@ -24,3 +24,7 @@ Järjestelmään kirjaudutaan sisään, jos haluaa lisätä omia reseptejä. Tav
 * Listaa käyttäjät
 * Poista käyttäjä
 * Muokkaa reseptejä
+
+## Dokumentaatio
+* [Käyttötapaukset](documentation/userstory.md)
+* [Tietokannan dokumentaatio](documentation/database.md)
