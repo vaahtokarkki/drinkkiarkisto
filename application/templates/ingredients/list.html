@@ -5,11 +5,13 @@
     <tr>
       <th>Ainesosa</th>
       <th>Ykiskkö</th>
+      <th></th>
     </tr>
     {% for ingredient in ingredients %}
     <tr>
       <td>{{ ingredient.name }}</td>
       <td>{{ ingredient.unit }}</td>
+      <td><a href="{{url_for('ingredients_edit', ingredient_id=ingredient.id)}}"><button>Muokkaa</button></a></td>
     </tr>
     {% endfor %}
   </table>

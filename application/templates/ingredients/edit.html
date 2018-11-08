@@ -1,0 +1,9 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('ingredients_save_edit', ingredient_id=ingredient.id) }}">
+  <input type="text" name="name" value="{{ingredient.name}}"/> 
+  <input type="text" name="unit" value="{{ingredient.unit}}" placeholder="Yksikkö">
+  <input type="submit" value="Tallenna"/>
+</form>
+{% endblock %}

@@ -21,5 +21,8 @@ from application.drinks import views
 from application.ingredients import models
 from application.ingredients import views
 
+from application.keywords import models
+from application.keywords import views
+
 # Luodaan lopulta tarvittavat tietokantataulut
 db.create_all()

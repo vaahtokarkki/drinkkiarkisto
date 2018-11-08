@@ -1,0 +1,8 @@
+{% extends "layout.html" %}
+  
+{% block body %}
+<form method="POST" action="{{ url_for('keywords_create') }}">
+  <input type="text" name="name" placeholder="Avainsana"/>
+  <input type="submit" value="Lisää avainsana"/>
+</form>
+{% endblock %}

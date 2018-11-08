@@ -1,0 +1,17 @@
+{% extends "layout.html" %}
+
+{% block body %}
+  <table>
+    <tr>
+      <th>Avainsana</th>
+      <th></th>
+    </tr>
+    {% for keyword in keywords %}
+    <tr>
+      <td>{{ keyword.name }}</td>
+      <td><a href="{{url_for('keywords_edit', keyword_id=keyword.id)}}"><button>Muokkaa</button></a></td>
+    </tr>
+    {% endfor %}
+  </table>
+  <p><a href="/keywords/new">Lisää uusi ainesosa</a></p>
+{% endblock %}
