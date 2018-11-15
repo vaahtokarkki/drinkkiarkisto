@@ -1,0 +1,28 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h3>{{drink.name}}</h3>
+<b>Ainesosat: </b><br>
+<table>
+    <tr>
+        <th>Nimi</th>
+        <th>Määrä</th>
+    </tr>
+    {% for ingredient in drink.ingredients %}
+    <tr>
+        <td>{{ingredient.name}}</td>
+        <td>N/A {{ingredient.unit}}</td>
+    </tr>
+    {% endfor %}
+</table>
+<br>
+<b>Avainsanat: </b><br>
+<ul>
+    {% for keyword in drink.tags %}
+    <li>{{keyword.name}}</li>
+    {% endfor %}
+</ul>
+<br>
+<a href="{{url_for('drinks_edit', drink_id=drink.id)}}"><button>Muokkaa</button></a>
+{% endblock %}

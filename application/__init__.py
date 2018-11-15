@@ -11,7 +11,7 @@ app.config["SQLALCHEMY_DATABASE_URI"] = "sqlite:///tasks.db"
 app.config["SQLALCHEMY_ECHO"] = True
 
 # Luodaan db-olio, jota käytetään tietokannan käsittelyyn
-db = SQLAlchemy(app)
+db = SQLAlchemy(app,session_options={"autoflush": False})
 
 from application import views
 

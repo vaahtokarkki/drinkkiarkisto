@@ -1,8 +1,55 @@
 {% extends "layout.html" %}
-  
+
+
+
+
 {% block body %}
 <form method="POST" action="{{ url_for('drinks_create') }}">
-  <input type="text" name="name"/>
-  <input type="submit" value="Lisää drinkki"/>
+  {{form.ingredientsAmount}}
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="name">{{form.name.label}}</label>
+      {{form.name(class_="form-control")}}
+    </div>
+  </div>
+  <div id="ingredientsWrapper">
+    <div class="form-row" id="selectGroup">
+      <div class="form-group col-xs-2">
+        <label for="name">{{form.amount.label}}</label>
+        {{form.amount(class_="form-control")}}
+      </div>
+      <div class="form-group col-xs-5">
+        <label for="name">{{form.ingredients.label}}</label>
+        {{form.ingredients(class_="form-control",name_="ingredients[]")}}
+      </div>
+    </div>
+  </div>
+
+
+
+  <div class="form-row">
+    <div class="form-group col-md-5">
+      <label for="keywords">{{form.keywords.label}}</label>
+      {{form.keywords(class_="form-control")}}
+    </div>
+  </div>
+  <br>
+  <input type="submit" value="Lisää drinkki" />
 </form>
+
+{% block javascript %}
+<script type="text/javascript">
+  function createInput() {
+    var selectAmount = parseInt($("#ingredientsAmount")[0].value)+1;
+    var cloned = $("#selectGroup").clone();
+    cloned.attr("id", "");
+    cloned.find("select").attr("id", "ingredients"+selectAmount).attr("name", "ingredients" + (selectAmount));
+    cloned.find("input").attr("id","amount-"+selectAmount).attr("name","amount-"+selectAmount);
+    cloned.appendTo("#ingredientsWrapper");
+    $("#ingredientsAmount")[0].value=selectAmount;
+  }
+  //createInput();
+
+</script>
+{%endblock%}
 {% endblock %}
