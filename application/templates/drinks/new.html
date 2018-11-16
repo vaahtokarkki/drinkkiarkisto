@@ -43,7 +43,7 @@
     var selectAmount = parseInt($("#ingredientsAmount")[0].value)+1;
     var cloned = $("#selectGroup").clone();
     cloned.attr("id", "");
-    cloned.find("select").attr("id", "ingredients"+selectAmount).attr("name", "ingredients" + (selectAmount));
+    cloned.find("select").attr("id", "ingredients-"+selectAmount).attr("name", "ingredients-" + (selectAmount));
     cloned.find("input").attr("id","amount-"+selectAmount).attr("name","amount-"+selectAmount);
     cloned.appendTo("#ingredientsWrapper");
     $("#ingredientsAmount")[0].value=selectAmount;
