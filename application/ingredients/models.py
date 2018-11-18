@@ -1,6 +1,8 @@
 from application import db
 
 class Ingredient(db.Model):
+    __tablename__ = "ingredient"
+    
     id = db.Column(db.Integer, primary_key=True)
     date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
     date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
