@@ -11,9 +11,9 @@ class MultiCheckboxField(SelectMultipleField):
     option_widget	= CheckboxInput()
 
 class NewDrinkForm(FlaskForm):
-    name = StringField("Drinkin nimi",[validators.Length(min=2)])
+    name = StringField("Drinkin nimi")
 
-    amount = IntegerField("Määrä",[validators.required()])
+    amount = IntegerField("Määrä")
     #ingredient = StringField("Ainesosa")
 
     ingredientsAmount = HiddenField(default=0)

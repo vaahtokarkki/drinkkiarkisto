@@ -26,8 +26,7 @@ def drinks_form():
 def drinks_create():
     form = NewDrinkForm(request.form)
 
-    if not form.validate():
-        return render_template("drinks/new.html", form=form, ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
+    
 
     d = Drink(form.name.data)
     ingredientAmount = int(form.ingredientsAmount.data)
