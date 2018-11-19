@@ -25,18 +25,20 @@ def drinks_form():
 @app.route("/drinks/", methods=["POST"])
 def drinks_create():
     form = NewDrinkForm(request.form)
+
+    if not form.validate():
+        return render_template("drinks/new.html", form=form, ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
+
     d = Drink(form.name.data)
     ingredientAmount = int(form.ingredientsAmount.data)
 
     for i in range(0, ingredientAmount):
         if i is 0:
-            print("blahh "+form.ingredients.data)
             ingredient = Ingredient.query.get(form.ingredients.data)
             d.ingredients.append(ingredient)
             continue
         ingredient = Ingredient.query.get(i)
         d.ingredients.append(ingredient)
-
 
     for id in form.keywords.data:
         k = Keyword.query.get(id)

@@ -1,6 +1,8 @@
 from application import app, db
 from flask import render_template, request, url_for, redirect
+
 from application.keywords.models import Keyword
+from application.keywords.forms import NewKeywordForm
 
 
 @app.route("/keywords", methods=["GET"])
@@ -10,12 +12,17 @@ def keywords_index():
 
 @app.route("/keywords/new/")
 def keywords_form():
-    return render_template("keywords/new.html")
+    return render_template("keywords/new.html", form=NewKeywordForm())
 
 
 @app.route("/keywords/", methods=["POST"])
 def keywords_create():
-    k = Keyword(request.form.get("name"))
+    form = NewKeywordForm(request.form)
+
+    if not form.validate():
+        return render_template("keywords/new.html", form=form)
+
+    k = Keyword(form.name.data)
 
     db.session().add(k)
     db.session().commit()
@@ -25,13 +32,20 @@ def keywords_create():
 @app.route("/keywords/edit/<keyword_id>/", methods=["GET"])
 def keywords_edit(keyword_id):
     k = Keyword.query.get(keyword_id)
-    return render_template("keywords/edit.html", keyword=k)
+
+    form = NewKeywordForm()
+    form.name.data = k.name
+    return render_template("keywords/edit.html", form=form, keyword=k)
 
 @app.route("/keywords/edit/<keyword_id>/", methods=["POST"])
 def keywords_save_edit(keyword_id):
+    form = NewKeywordForm(request.form)
     k = Keyword.query.get(keyword_id)
 
-    k.name = request.form.get("name")
+    if not form.validate():
+        return render_template("keywords/edit.html", form=form, keyword=k)
+
+    k.name = form.name.data
 
     db.session().commit()
 

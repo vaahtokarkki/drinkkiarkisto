@@ -1,5 +1,5 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SelectMultipleField, HiddenField 
+from wtforms import StringField, SelectField, SelectMultipleField, HiddenField, IntegerField,validators
 from wtforms.widgets import ListWidget, CheckboxInput
 
 from application.ingredients.models import Ingredient
@@ -11,9 +11,9 @@ class MultiCheckboxField(SelectMultipleField):
     option_widget	= CheckboxInput()
 
 class NewDrinkForm(FlaskForm):
-    name = StringField("Drinkin nimi")
+    name = StringField("Drinkin nimi",[validators.Length(min=2)])
 
-    amount = StringField("Määrä")
+    amount = IntegerField("Määrä",[validators.required()])
     #ingredient = StringField("Ainesosa")
 
     ingredientsAmount = HiddenField(default=0)
