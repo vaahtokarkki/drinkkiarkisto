@@ -15,7 +15,6 @@ ingredientsTable = db.Table('ingredients_helper',
                                 'drink.id'), primary_key=True)
                             )
 
-
 class Drink(Base):
     __tablename__ = "drink"
 

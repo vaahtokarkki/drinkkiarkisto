@@ -32,12 +32,16 @@ def drinks_create():
     d = Drink(form.name.data)
     ingredientAmount = int(form.ingredientsAmount.data)
 
-    for i in range(0, ingredientAmount):
+    for i in range(0, ingredientAmount+1):
         if i is 0:
             ingredient = Ingredient.query.get(form.ingredients.data)
             d.ingredients.append(ingredient)
             continue
-        ingredient = Ingredient.query.get(i)
+        id = request.form.get("ingredients-"+str(i))
+        ingredient = Ingredient.query.get(id)
+        
+        if ingredient in d.ingredients:
+            continue
         d.ingredients.append(ingredient)
 
     for id in form.keywords.data:
@@ -59,9 +63,19 @@ def drinks_edit(drink_id):
 @app.route("/drinks/edit/<drink_id>/", methods=["POST"])
 def drinks_save_edit(drink_id):
     d = Drink.query.get(drink_id)
-
     d.name = request.form.get("name")
 
     db.session().commit()
+    return redirect(url_for("drinks_index"))
 
+
+@app.route("/drinks/delete/<drink_id>/", methods=["GET"])
+def drinks_delete(drink_id):
+    d = Drink.query.get(drink_id)
+
+    if d is None:
+        return redirect(url_for("drinks_index"))
+
+    db.session.delete(d)
+    db.session().commit()
     return redirect(url_for("drinks_index"))
