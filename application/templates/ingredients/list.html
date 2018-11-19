@@ -1,20 +1,28 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
+<table class="table">
+  <thead>
     <tr>
-      <th>Ainesosa</th>
-      <th>Ykiskkö</th>
-      <th></th><th></th>
+      <th scope="col">Ainesosa</th>
+      <th scope="col">Ykiskkö</th>
+      <th scope="col"></th>
     </tr>
+  </thead>
+  <tbody>
     {% for ingredient in ingredients %}
     <tr>
       <td>{{ ingredient.name }}</td>
       <td>{{ ingredient.unit }}</td>
-      <td><a href="{{url_for('ingredients_edit', ingredient_id=ingredient.id)}}"><button>Muokkaa</button></a></td>
-      <td><a href="{{url_for('ingredients_delete', ingredient_id=ingredient.id)}}"><button>Poista</button></a></td>
+      <td>
+        <a href="{{url_for('ingredients_edit', ingredient_id=ingredient.id)}}"><button class="btn btn-primary">Muokkaa</button></a>
+        <a href="{{url_for('ingredients_delete', ingredient_id=ingredient.id)}}"><button class="btn btn-danger">Poista</button></a>
+      </td>
     </tr>
     {% endfor %}
-  </table>
-  <p><a href="/ingredients/new">Lisää uusi ainesosa</a></p>
+  </tbody>
+</table>
+<p>
+  <a href="/ingredients/new"><button class="btn btn-outline-success">Lisää uusi ainesosa</button></a>
+</p>
 {% endblock %}

@@ -1,23 +1,25 @@
 {% extends "layout.html" %}
 
 {% block body %}
-  <table>
+<table class="table">
+  <thead>
     <tr>
-      <th>Drinkki</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th scope="col">Drinkki</th>
+      <th scope="col"></th>
     </tr>
+  </thead>
+  <tbody>
     {% for drink in drinks %}
     <tr>
-      <td>{{ drink.name }}</td>
       <td>
-      <a href="{{url_for('get_drink', drink_id=drink.id)}}"><button>Näytä</button></a>
+        <a href="{{url_for('get_drink', drink_id=drink.id)}}">{{ drink.name }}</a>
       </td>
-      <td><a href="{{url_for('drinks_edit', drink_id=drink.id)}}"><button>Muokkaa</button></a></td>
-      <td><a href="{{url_for('drinks_delete', drink_id=drink.id)}}"><button>Poista</button></a></td>
+      <td><a href="{{url_for('drinks_edit', drink_id=drink.id)}}"><button class="btn btn-primary">Muokkaa</button></a> <a href="{{url_for('drinks_delete', drink_id=drink.id)}}"><button class="btn btn-danger">Poista</button></a></td>
     </tr>
     {% endfor %}
-  </table>
-  <p><a href="/drinks/new">Lisää uusi drinkki</a></p>
+  </tbody>
+</table>
+<p>
+    <a href="/drinks/new"><button class="btn btn-outline-success">Lisää uusi drinkki</button></a>
+  </p>
 {% endblock %}

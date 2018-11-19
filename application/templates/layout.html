@@ -12,21 +12,52 @@
 </head>
 
 <body>
-  {% if current_user.is_authenticated %}
-  <p>
-    Kirjautunut nimellä {{ current_user.name }} <a href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
-  </p>
-  {% else %}
-  <a href="{{ url_for('auth_login') }}">Kirjaudu</a> <a href="{{url_for('auth_register_form') }}">Rekisteröidy</a>
-  {% endif %}
-  <p>
-    <a href="/drinks">Selaa drinkkejä</a><br>
-    <a href="/ingredients">Selaa ainesosia</a><br>
-    <a href="/keywords">Selaa avainsanoja</a>
-  </p>
-  {% block body %}
 
-  {% endblock %}
+  <nav class="navbar navbar-expand-md navbar-dark bg-dark mb-4">
+    <a class="navbar-brand" href="/">Drinkkiarkisto</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse"
+      aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarCollapse">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('drinks_index') }} ">Selaa drikkejä</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('ingredients_index') }} ">Selaa ainesosia</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('keywords_index') }} ">Selaa avainsanoja</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="{{ url_for('drinks_form') }} ">Lisää uusi drinkki</a>
+        </li>
+      </ul>
+      <div class="form-inline mt-2 mt-md-0">
+        <ul class="navbar-nav mr-auto">
+          {% if current_user.is_authenticated %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth_logout') }}">Kirjautuneena {{ current_user.name }} -- Kirjaudu
+              ulos</a>
+          </li>
+          {% else %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth_login') }}">Kirjaudu sisään</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{{ url_for('auth_register_form') }}">Rekisteröidy</a>
+          </li>
+          {% endif %}
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <main role="main" class="container">
+    {% block body %}
+    {% endblock %}
+  </main>
 
 
   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49"
