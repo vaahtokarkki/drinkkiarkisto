@@ -1,13 +1,9 @@
 from application import db
+from application.models import Base
 
-class Ingredient(db.Model):
+class Ingredient(Base):
     __tablename__ = "ingredient"
     
-    id = db.Column(db.Integer, primary_key=True)
-    date_created = db.Column(db.DateTime, default=db.func.current_timestamp())
-    date_modified = db.Column(db.DateTime, default=db.func.current_timestamp(),
-                              onupdate=db.func.current_timestamp())
-
     name = db.Column(db.String(144), nullable=False)
     unit = db.Column(db.String(10))
 
