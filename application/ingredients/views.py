@@ -53,3 +53,15 @@ def ingredients_save_edit(ingredient_id):
     db.session().commit()
 
     return redirect(url_for("ingredients_index"))
+
+@app.route("/ingredients/delete/<ingredient_id>/", methods=["GET"])
+def ingredients_delete(ingredient_id):
+    ingredient = Ingredient.query.get(ingredient_id)
+
+    if ingredient is None:
+        return redirect(url_for("ingredients_index"))
+    
+    db.session.delete(ingredient)
+    db.session().commit()
+
+    return redirect(url_for("ingredients_index"))

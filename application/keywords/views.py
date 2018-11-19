@@ -50,3 +50,15 @@ def keywords_save_edit(keyword_id):
     db.session().commit()
 
     return redirect(url_for("keywords_index"))
+
+@app.route("/keywords/delete/<keyword_id>/", methods=["GET"])
+def keywords_delete(keyword_id):
+    keyword = Keyword.query.get(keyword_id)
+
+    if keyword is None:
+        return redirect(url_for("keywords_index"))
+    
+    db.session.delete(keyword)
+    db.session().commit()
+
+    return redirect(url_for("keywords_index"))

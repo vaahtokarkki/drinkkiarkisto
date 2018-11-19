@@ -4,12 +4,13 @@
   <table>
     <tr>
       <th>Avainsana</th>
-      <th></th>
+      <th></th><th></th>
     </tr>
     {% for keyword in keywords %}
     <tr>
       <td>{{ keyword.name }}</td>
       <td><a href="{{url_for('keywords_edit', keyword_id=keyword.id)}}"><button>Muokkaa</button></a></td>
+      <td><a href="{{url_for('keywords_delete', keyword_id=keyword.id)}}"><button>Poista</button></a></td>
     </tr>
     {% endfor %}
   </table>
