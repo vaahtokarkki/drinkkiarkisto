@@ -22,10 +22,10 @@
                 </tr>
             </thead>
             <tbody>
-                {% for ingredient in drink.ingredients %}
+                {% for i in drink.ingredients %}
                 <tr>
-                    <td>{{ingredient.name}}</td>
-                    <td>n/a {{ingredient.unit}}</td>
+                    <td>{{i.ingredient.name}}</td>
+                    <td>{{i.amount}} {{i.ingredient.unit}}</td>
                 </tr>
                 {% endfor %}
             </tbody>

@@ -1,7 +1,7 @@
 from application import app, db
 from flask import render_template, request, url_for, redirect
 
-from application.drinks.models import Drink
+from application.drinks.models import Drink, DrinkIngredient
 from application.drinks.forms import NewDrinkForm
 from application.keywords.models import Keyword
 from application.ingredients.models import Ingredient
@@ -26,22 +26,24 @@ def drinks_form():
 def drinks_create():
     form = NewDrinkForm(request.form)
 
-    
-
     d = Drink(form.name.data)
     ingredientAmount = int(form.ingredientsAmount.data)
 
     for i in range(0, ingredientAmount+1):
         if i is 0:
             ingredient = Ingredient.query.get(form.ingredients.data)
-            d.ingredients.append(ingredient)
+            if ingredient is None:
+                continue
+
+            amount = form.amount.data
+            DrinkIngredient(drink=d, ingredient=ingredient, amount=amount)
             continue
         id = request.form.get("ingredients-"+str(i))
         ingredient = Ingredient.query.get(id)
-        
-        if ingredient in d.ingredients:
+        amount = int(request.form.get("amount-"+str(i)))
+        if ingredient is None or ingredient in d.ingredients:
             continue
-        d.ingredients.append(ingredient)
+        DrinkIngredient(drink=d, ingredient=ingredient, amount=amount)
 
     for id in form.keywords.data:
         k = Keyword.query.get(id)
