@@ -1,10 +1,9 @@
 from flask_wtf import FlaskForm
-from wtforms import StringField, SelectField, SelectMultipleField, HiddenField, IntegerField,validators
+from wtforms import StringField, SelectField, SelectMultipleField, HiddenField, IntegerField,validators, TextAreaField
 from wtforms.widgets import ListWidget, CheckboxInput
 
 from application.ingredients.models import Ingredient
 from application.keywords.models import Keyword
-
 
 class MultiCheckboxField(SelectMultipleField):
     widget			= ListWidget(prefix_label=False)
@@ -12,12 +11,10 @@ class MultiCheckboxField(SelectMultipleField):
 
 class NewDrinkForm(FlaskForm):
     name = StringField("Drinkin nimi")
-
     amount = IntegerField("Määrä")
-    #ingredient = StringField("Ainesosa")
+    instructions = TextAreaField("Valmistusohjeet")
 
     ingredientsAmount = HiddenField(default=0)
-    #ingredientsAmount.default="1"
 
     ingredientsList = Ingredient.query.all()
     ingredientPairs = []
@@ -33,3 +30,7 @@ class NewDrinkForm(FlaskForm):
 
     class Meta:
         csrf = False
+
+class EditDrink(FlaskForm):
+    name = StringField("Drinkin nimi",[validators.Length(min=2,max=20, message=(u'Nimen olatava vähintään 2 merkkiä ja enintään 20 merkkiä pitkä'))])
+    instructions = TextAreaField("Valmistusohjeet")

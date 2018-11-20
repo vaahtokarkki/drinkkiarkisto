@@ -4,13 +4,16 @@
 <div class="card" style="width:70%">
     <div class="card-body">
         <h5 class="card-title">{{drink.name}}</h5>
+
+        {% if drink.instructions is not none %}
         <h6>Ohjeet</h6>
         <p class="card-text">
-            Quisque ut tristique justo, non consectetur leo. Morbi eget vehicula neque. Nulla semper eros et mollis
-            mollis. Aenean sagittis at nisl a cursus. Nullam consequat tempor eleifend. In quis magna egestas,
-            pellentesque turpis sed, ultricies ex. Phasellus non odio sit amet lectus vulputate ornare. Suspendisse
-            varius elit est, eget rhoncus risus finibus in.
+            {{drink.instructions}}
         </p>
+        {% else %}
+        <h6>Ei ohjeita</h6>
+        {% endif %}
+
 
         {% if drink.ingredients|length > 0 %}
         <p class="card-text"><b>Ainesosat</b></p>

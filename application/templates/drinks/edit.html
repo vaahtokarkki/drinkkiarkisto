@@ -1,8 +1,61 @@
 {% extends "layout.html" %}
-  
+
 {% block body %}
 <form method="POST" action="{{ url_for('drinks_save_edit', drink_id=drink.id) }}">
-  <input type="text" name="name" value="{{drink.name}}"/>
-  <input type="submit" value="Tallenna"/>
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="name">{{form.name.label}}</label>
+      {{form.name(class_="form-control")}}
+    </div>
+  </div>
+  {% if form.name.errors|length > 0 %}
+  <div class="form-row">
+    <div class="alert alert-danger col-md-4">
+      <ul>
+        {% for error in form.name.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="name">{{form.instructions.label}}</label>
+      {{form.instructions(class_="form-control")}}
+    </div>
+  </div>
+  {% if form.instructions.errors|length > 0 %}
+  <div class="form-row">
+    <div class="alert alert-danger col-md-4">
+      <ul>
+        {% for error in form.instructions.errors %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
+
+  {% if drink.ingredients|length > 0 %}
+  {% for i in drink.ingredients %}
+  <div class="form-row">
+    <div class="form-group col-xs-2">
+      <label for="amount">Määrä</label>
+      <input class="form-control" value="{{i.amount}}"> 
+    </div>
+    <div class="form-group col-xs-2">
+      {{i.ingredient.unit}}
+    </div>
+    <div class="form-group col-xs-5">
+      {{i.ingredient.name}}
+    </div>
+  </div>
+  {% endfor %}
+  {% endif %}
+
+
+  <input type="submit" value="Tallenna" class="btn btn-success" />
 </form>
 {% endblock %}

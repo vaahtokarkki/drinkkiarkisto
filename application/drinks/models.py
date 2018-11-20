@@ -16,7 +16,8 @@ class Drink(Base):
                            backref=db.backref('keywords_helper', lazy=True, load_on_pending=False))
 
     ingredients = db.relationship('DrinkIngredient', back_populates='drink')
-    name = db.Column(db.String(144), nullable=False)
+    name = db.Column(db.String(50), nullable=False)
+    instructions = db.Column(db.String(250))
 
     def __init__(self, name):
         self.name = name

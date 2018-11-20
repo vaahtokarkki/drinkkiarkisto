@@ -2,7 +2,7 @@ from application import app, db
 from flask import render_template, request, url_for, redirect
 
 from application.drinks.models import Drink, DrinkIngredient
-from application.drinks.forms import NewDrinkForm
+from application.drinks.forms import NewDrinkForm, EditDrink
 from application.keywords.models import Keyword
 from application.ingredients.models import Ingredient
 
@@ -10,7 +10,6 @@ from application.ingredients.models import Ingredient
 @app.route("/drinks", methods=["GET"])
 def drinks_index():
     return render_template("drinks/list.html", drinks=Drink.query.all())
-
 
 @app.route("/drinks/<drink_id>", methods=["GET"])
 def get_drink(drink_id):
@@ -21,14 +20,29 @@ def get_drink(drink_id):
 def drinks_form():
     return render_template("drinks/new.html", form=NewDrinkForm(), ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
 
-
 @app.route("/drinks/", methods=["POST"])
 def drinks_create():
     form = NewDrinkForm(request.form)
 
-    d = Drink(form.name.data)
-    ingredientAmount = int(form.ingredientsAmount.data)
+    valid = True
+    name = form.name.data
+    instructions = form.instructions.data
 
+    if len(name) < 2 or len(name) > 20:
+        form.name.errors.append("Nimen oltava vähintään 2 merkkiä ja enintään 20 merkkiä ptkä")
+        valid = False
+
+    if len(instructions) > 200:
+        form.instructions.errors.append("Ohje saa olla enintään 200 merkkiä pitkä")
+        valid = False
+
+    if not valid:
+        return render_template("drinks/new.html", form=form, ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
+
+    d = Drink(name)
+    d.instructions = instructions
+    ingredientAmount = int(form.ingredientsAmount.data)
+    
     for i in range(0, ingredientAmount+1):
         if i is 0:
             ingredient = Ingredient.query.get(form.ingredients.data)
@@ -58,13 +72,37 @@ def drinks_create():
 @app.route("/drinks/edit/<drink_id>/", methods=["GET"])
 def drinks_edit(drink_id):
     d = Drink.query.get(drink_id)
-    return render_template("drinks/edit.html", drink=d)
+    form = EditDrink()
+    form.name.data = d.name
+    form.instructions.data = d.instructions
+    return render_template("drinks/edit.html", drink=d, form=form)
 
 
 @app.route("/drinks/edit/<drink_id>/", methods=["POST"])
 def drinks_save_edit(drink_id):
+    form = EditDrink(request.form)
     d = Drink.query.get(drink_id)
-    d.name = request.form.get("name")
+
+    valid = True
+    name = form.name.data
+    instructions = form.instructions.data
+
+    if len(name) < 2 or len(name) > 20:
+        form.name.errors.append("Nimen oltava vähintään 2 merkkiä ja enintään 20 merkkiä ptkä")
+        valid = False
+
+    if len(instructions) > 200:
+        form.instructions.errors.append("Ohje saa olla enintään 200 merkkiä pitkä")
+        valid = False
+    
+    if not valid:
+        return render_template("drinks/edit.html", form=form, drink=d)
+
+
+    d.name = form.name.data
+    d.instructions = form.instructions.data
+
+    #TODO: Save ingredient changes
 
     db.session().commit()
     return redirect(url_for("drinks_index"))
