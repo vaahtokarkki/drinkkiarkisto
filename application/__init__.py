@@ -23,6 +23,8 @@ from application.ingredients import views
 from application.keywords import models
 from application.keywords import views
 
+from application.search import views
+
 from application.auth import models
 from application.auth import views
 

@@ -2,5 +2,30 @@
 
 {% block body %}
 <h1> Drinkkiarkisto</h1>
-
+<br><br>
+<form method="GET" action="{{ url_for('search_drinks') }}">
+    <div class="form-group row">
+        <label for="search" class="col-sm-2 col-form-label">{{form.query.label}}</label>
+        <div class="col-sm-4">
+            {{form.query(class_="form-control")}}
+        </div>
+        <div class="col-sm-2">
+            <input type="submit" class="btn btn-success" value="Hae">
+        </div>
+    </div>
+</form>
+<div class="row">
+    <h4>Tai</h4>
+</div>
+<div class="row">
+    <div class="col-sm-3">
+        <button class="btn btn-outline-primary">Selaa kaikkia drinkkejä</button>
+    </div>
+    <div class="col-sm-3">
+        <button class="btn btn-outline-primary">Selaa kaikkia ainesosia</button>
+    </div>
+    <div class="col-sm-3">
+        <button class="btn btn-outline-primary">Selaa kaikkia avainsanoja</button>
+    </div>
+</div>
 {% endblock %}
