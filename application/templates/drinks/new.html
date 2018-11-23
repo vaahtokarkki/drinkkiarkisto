@@ -51,9 +51,22 @@
       </div>
     </div>
   </div>
+  {% if form.ingredientError|length > 0 %}
+  <div class="form-row">
+    <div class="alert alert-danger col-md-4">
+      <ul>
+        {% for error in form.ingredientError %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
+  {% endif %}
 
   <div class="form-row">
-    <button class="btn btn-primary" onclick="createInput()">Lisää aineosia</button>
+      <div class="form-group col-md-5">
+    <button class="btn btn-primary" type="button" onclick="createInput()">Lisää aineosia</button>
+    </div>
   </div>
 
   <div class="form-row">

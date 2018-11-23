@@ -43,7 +43,7 @@
   <div class="form-row">
     <div class="form-group col-xs-2">
       <label for="amount">Määrä</label>
-      <input class="form-control" value="{{i.amount}}"> 
+      <input class="form-control" value="{{i.amount}}" name="amount-{{loop.index}}"> 
     </div>
     <div class="form-group col-xs-2">
       {{i.ingredient.unit}}
@@ -53,6 +53,18 @@
     </div>
   </div>
   {% endfor %}
+  {% endif %}
+  
+  {% if form.ingredientError|length > 0 %}
+  <div class="form-row">
+    <div class="alert alert-danger col-md-4">
+      <ul>
+        {% for error in form.ingredientError %}
+        <li>{{ error }}</li>
+        {% endfor %}
+      </ul>
+    </div>
+  </div>
   {% endif %}
 
 

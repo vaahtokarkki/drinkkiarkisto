@@ -29,16 +29,16 @@ def drinks_create():
     instructions = form.instructions.data
 
     if len(name) < 2 or len(name) > 20:
+        form.name.errors = list(form.name.errors)
         form.name.errors.append("Nimen oltava vähintään 2 merkkiä ja enintään 20 merkkiä ptkä")
         valid = False
 
     if len(instructions) > 200:
+        form.instructions.errors = list(form.instructions.errors)
         form.instructions.errors.append("Ohje saa olla enintään 200 merkkiä pitkä")
         valid = False
 
-    if not valid:
-        return render_template("drinks/new.html", form=form, ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
-
+    
     d = Drink(name)
     d.instructions = instructions
     ingredientAmount = int(form.ingredientsAmount.data)
@@ -49,15 +49,32 @@ def drinks_create():
             if ingredient is None:
                 continue
 
-            amount = form.amount.data
+            try:
+                amount = int(form.amount.data)
+            except:
+                form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"] 
+                valid = False
+                continue
+                
             DrinkIngredient(drink=d, ingredient=ingredient, amount=amount)
             continue
+        
         id = request.form.get("ingredients-"+str(i))
         ingredient = Ingredient.query.get(id)
-        amount = int(request.form.get("amount-"+str(i)))
+        try:
+            amount = int(request.form.get("amount-"+str(i)))
+        except:
+            form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"]
+            valid = False
+            continue
+        
         if ingredient is None or ingredient in d.ingredients:
             continue
+            
         DrinkIngredient(drink=d, ingredient=ingredient, amount=amount)
+
+    if not valid:
+        return render_template("drinks/new.html", form=form, ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
 
     for id in form.keywords.data:
         k = Keyword.query.get(id)
@@ -75,6 +92,7 @@ def drinks_edit(drink_id):
     form = EditDrink()
     form.name.data = d.name
     form.instructions.data = d.instructions
+
     return render_template("drinks/edit.html", drink=d, form=form)
 
 
@@ -88,21 +106,30 @@ def drinks_save_edit(drink_id):
     instructions = form.instructions.data
 
     if len(name) < 2 or len(name) > 20:
+        form.name.errors = list(form.name.errors)
         form.name.errors.append("Nimen oltava vähintään 2 merkkiä ja enintään 20 merkkiä ptkä")
         valid = False
 
     if len(instructions) > 200:
+        form.instructions.errors = list(form.instructions.errors)
         form.instructions.errors.append("Ohje saa olla enintään 200 merkkiä pitkä")
         valid = False
-    
+
+    for i in range(1,len(d.ingredients)+1):
+        try:
+            amount = int(request.form.get("amount-"+str(i)))
+        except:
+            form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"]
+            valid = False
+            continue
+
+        d.ingredients[i-1].amount = amount
+
     if not valid:
         return render_template("drinks/edit.html", form=form, drink=d)
 
-
     d.name = form.name.data
     d.instructions = form.instructions.data
-
-    #TODO: Save ingredient changes
 
     db.session().commit()
     return redirect(url_for("drinks_index"))
