@@ -1,6 +1,7 @@
 from application import db
 from application.models import Base
 from application.ingredients.models import Ingredient
+from application.auth.models import User
 
 keywords = db.Table('keywords_helper',
                     db.Column('keyword_id', db.Integer, db.ForeignKey(
@@ -18,6 +19,8 @@ class Drink(Base):
     ingredients = db.relationship('DrinkIngredient', back_populates='drink')
     name = db.Column(db.String(50), nullable=False)
     instructions = db.Column(db.String(250))
+    account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
+    user = db.relationship("User", back_populates="drinks")
 
     def __init__(self, name):
         self.name = name

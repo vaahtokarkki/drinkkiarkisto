@@ -1,5 +1,6 @@
 from application import app, db
 from flask import render_template, request, url_for, redirect
+from flask_login import current_user
 
 from application.drinks.models import Drink, DrinkIngredient
 from application.drinks.forms import NewDrinkForm, EditDrink
@@ -70,7 +71,7 @@ def drinks_create():
         
         if ingredient is None or ingredient in d.ingredients:
             continue
-            
+
         DrinkIngredient(drink=d, ingredient=ingredient, amount=amount)
 
     if not valid:
@@ -79,6 +80,9 @@ def drinks_create():
     for id in form.keywords.data:
         k = Keyword.query.get(id)
         d.tags.append(k)
+
+    if current_user is not None:
+        d.account_id = current_user.id
 
     db.session().add(d)
     db.session().commit()

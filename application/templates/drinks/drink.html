@@ -44,6 +44,11 @@
         </ul>
         {% endif %}
         <br>
+
+        <p class="card-text">
+            <b>Drinkin lisääjä: </b>{{drink.user.username}} ({{drink.user.name}})
+        </p>
+
         <p class="card-text">
             <a href="{{url_for('drinks_edit', drink_id=drink.id)}}" class="btn btn-success">Muokkaa</a>
         </p>
