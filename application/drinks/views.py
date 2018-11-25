@@ -19,8 +19,7 @@ def get_drink(drink_id):
 
 @app.route("/drinks/new/")
 def drinks_form():
-
-    return render_template("drinks/new.html", form=NewDrinkForm(Ingredient.query.all()), ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
+    return render_template("drinks/new.html", form=NewDrinkForm(), ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
 
 @app.route("/drinks/", methods=["POST"])
 @login_required
@@ -53,7 +52,7 @@ def drinks_create():
                 continue
 
             try:
-                amount = int(form.amount.data)
+                amount = float(form.amount.data)
             except:
                 form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"] 
                 valid = False
@@ -65,7 +64,7 @@ def drinks_create():
         id = request.form.get("ingredients-"+str(i))
         ingredient = Ingredient.query.get(id)
         try:
-            amount = int(request.form.get("amount-"+str(i)))
+            amount = float(request.form.get("amount-"+str(i)))
         except:
             form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"]
             valid = False

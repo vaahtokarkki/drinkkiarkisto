@@ -1,5 +1,12 @@
 {% extends "layout.html" %}
 {% block body %}
+<h2>Lisää uusi drinkki</h2>
+<div class="alert alert-info">
+  Anna drinkille kuvaava nimi ja mahdolliset valmistusohjeet.<br>
+  Ainesosia saa lisättyä "Lisää ainesosia" -napista. Jos ainesosalla ei ole yksikköä (esim. jää) aseta määräksi 0.<br>
+  Toistaiseksi ainesosat ja avainsanat täytyy lisätä erikseen (selaa sivun kautta), jos niitä ei löydy tietokannasta valmiiksi.
+</div>
+<h4 class="text-muted">Täydä tiedot</h4>
 <form method="POST" action="{{ url_for('drinks_create') }}">
   {{form.ingredientsAmount}}
 
@@ -93,7 +100,7 @@
     $("#ingredientsAmount")[0].value = amount;
   }
 
-  for (var i = 0; i < 2; i++) {
+  for (var i = 0; i < 1; i++) {
     createInput();
   }
 </script>
