@@ -36,7 +36,6 @@ def search_drinks():
         res = list(Drink.query.filter(Drink.tags.any(Keyword.id == id)))
         return render_template("search/results.html", results=res, query=name)
         
-
     #TODO: Extend search to instructions
     byName = list(Drink.query.filter(Drink.name.contains(form.query.data)))
     byIngredient = list(Drink.query.filter(Drink.ingredients.any(Ingredient.name.contains(form.query.data))))

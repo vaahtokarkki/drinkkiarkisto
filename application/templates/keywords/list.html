@@ -11,7 +11,7 @@
   <tbody>
     {% for keyword in keywords %}
     <tr>
-      <td>{{ keyword.name }}</td>
+      <td><a href="{{url_for('search_drinks')}}?keyword={{keyword.id}}">{{ keyword.name }}</a></td>
       <td>
         <a href="{{url_for('keywords_edit', keyword_id=keyword.id)}}"><button class="btn btn-primary">Muokkaa</button></a>
         <a href="{{url_for('keywords_delete', keyword_id=keyword.id)}}"><button class="btn btn-danger">Poista</button></a>
