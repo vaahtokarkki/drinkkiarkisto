@@ -1,7 +1,7 @@
+from application import app, db
 from flask import render_template, request, redirect, url_for
 from flask_login import login_user, logout_user
 
-from application import app
 from application.auth.models import User
 from application.auth.forms import LoginForm, RegisterForm
 
@@ -35,7 +35,13 @@ def auth_register_form():
 def auth_register():
     form = RegisterForm(request.form)
 
+    #TODO: Check if passwords not same
     if not form.validate():
         return render_template("auth/register.html", form=form)
+
+    user = User(form.name.data, form.username.data, form.password.data)
+
+    db.session().add(user)
+    db.session().commit()
 
     return redirect(url_for("auth_login"))
