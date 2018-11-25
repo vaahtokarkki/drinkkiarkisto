@@ -28,4 +28,19 @@
         <a href="{{ url_for('keywords_index') }} " class="btn btn-outline-primary">Selaa kaikkia avainsanoja</a>
     </div>
 </div>
+<div class="row">
+    <div class="card">
+        <div class="card-body">
+            <h5 class="card-title">Tilastoja</h5>
+            <h6 class="card-subtitle mb-2 text-muted">Tällä hetkellä drinkkiarkistossa:</h6>
+            <div class="card-text" style="margin-top:15px;">
+                <table class="table table-sm">
+                    <tr><td>Drinkkejä</td><td>{{stats.drinks}}kpl</td></tr>
+                    <tr><td>Ainesosia</td><td>{{stats.ingredients}}kpl</td></tr>
+                    <tr><td>Avainsanoja</td><td>{{stats.keywords}}kpl</td></tr>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 {% endblock %}
