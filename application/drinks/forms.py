@@ -10,13 +10,19 @@ class MultiCheckboxField(SelectMultipleField):
     option_widget	= CheckboxInput()
 
 class NewDrinkForm(FlaskForm):
-    def generateSelectOptions():
+    def generateSelectOptions(): #Define function as workaround to get options visible on heroku... 
         ingredientsList = Ingredient.query.all()
         ingredientPairs = []
         for i in ingredientsList:
             ingredientPairs.append((i.id, i.name+" ("+i.unit+")"))
         return ingredientPairs
     
+    def generateCheckboxOptions():
+        keywordPairs = []
+        for k in Keyword.query.all():
+            keywordPairs.append((k.id, k.name))
+        return keywordPairs
+
     name = StringField("Drinkin nimi")
     amount = DecimalField("Määrä")
     instructions = TextAreaField("Valmistusohjeet")
@@ -26,10 +32,7 @@ class NewDrinkForm(FlaskForm):
     ingredients = SelectField('Ainesosat',
                               choices=generateSelectOptions())
     
-    keywordPairs = []
-    for k in Keyword.query.all():
-        keywordPairs.append((k.id, k.name))
-    keywords = MultiCheckboxField('Avainsanat',choices=keywordPairs)
+    keywords = MultiCheckboxField('Avainsanat',choices=generateCheckboxOptions())
 
     class Meta:
         csrf = False
