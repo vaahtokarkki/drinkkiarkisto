@@ -18,9 +18,9 @@ def get_drink(drink_id):
 
 
 @app.route("/drinks/new/")
-@login_required
 def drinks_form():
-    return render_template("drinks/new.html", form=NewDrinkForm(), ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
+
+    return render_template("drinks/new.html", form=NewDrinkForm(Ingredient.query.all()), ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
 
 @app.route("/drinks/", methods=["POST"])
 @login_required

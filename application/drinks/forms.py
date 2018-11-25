@@ -10,19 +10,23 @@ class MultiCheckboxField(SelectMultipleField):
     option_widget	= CheckboxInput()
 
 class NewDrinkForm(FlaskForm):
+    def generateSelectOptions():
+        ingredientsList = Ingredient.query.all()
+        print("mitä")
+        ingredientPairs = []
+        for i in ingredientsList:
+            ingredientPairs.append((i.id, i.name+" ("+i.unit+")"))
+        return ingredientPairs
+    
     name = StringField("Drinkin nimi")
     amount = IntegerField("Määrä")
     instructions = TextAreaField("Valmistusohjeet")
 
     ingredientsAmount = HiddenField(default=0)
 
-    ingredientsList = Ingredient.query.all()
-    ingredientPairs = []
-    for i in ingredientsList:
-        ingredientPairs.append((i.id, i.name+" ("+i.unit+")"))
     ingredients = SelectField('Ainesosat',
-                              choices=ingredientPairs)
-
+                              choices=generateSelectOptions())
+    
     keywordPairs = []
     for k in Keyword.query.all():
         keywordPairs.append((k.id, k.name))
@@ -34,3 +38,4 @@ class NewDrinkForm(FlaskForm):
 class EditDrink(FlaskForm):
     name = StringField("Drinkin nimi",[validators.Length(min=2,max=20, message=(u'Nimen olatava vähintään 2 merkkiä ja enintään 20 merkkiä pitkä'))])
     instructions = TextAreaField("Valmistusohjeet")
+
