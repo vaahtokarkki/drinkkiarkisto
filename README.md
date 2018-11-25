@@ -8,6 +8,8 @@ Demon testitunnukset
 käyttäjätunnus: test  
 salasana: 123456
 
+>Toiminnallisuudessa voi olla tällä hetkellä pieniä puutteita, esimerkiksi uusia ainesosia ja drinkin reseptiä ei voi lisätä samalla lomakkeella. Myös osassa lomakkeiden (lähinnä lisää uusi drinkki) tietojen validoinnissa voi olla vielä aukkoja, johtuen wtform kirjaston hankaluudesta kun kenttiä on dynaaminen määrä.
+
 Drinkkireseptit kuvaavat cocktaileja ja muita juomasekoituksia. Reseptejä voi hakea juoman nimeen liittyvällä hakusanalla, jonkin ainesosan tai drinkin tyypin (alkudrinkki, cocktail, shotti,jne) mukaan. Reseptejä voi tarkastella myös listana, aakkosjärjestyksen, ainesosan tai juoman tyypin mukaan. 
 
 Juomia hakiessa samalla hakusanalla voi saada useita eri tuloksia tai samaan juomaan voidaan viitata usealla hakusanalla. Jokaiseen drinkkiin voi viitata yksi tai useampi avainsana, esimerkiksi jos drinkki on tunnettu usealla nimellä, voi muut nimet olla drinkin avainsanoina. 
