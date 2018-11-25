@@ -28,7 +28,11 @@
                 {% for i in drink.ingredients %}
                 <tr>
                     <td>{{i.ingredient.name}}</td>
-                    <td>{{i.amount}} {{i.ingredient.unit}}</td>
+                    <td>
+                            {% if i.amount > 0 %}
+                            {{i.amount}} {{i.ingredient.unit}}
+                            {% endif %}
+                    </td>
                 </tr>
                 {% endfor %}
             </tbody>

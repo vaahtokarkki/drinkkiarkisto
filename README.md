@@ -3,6 +3,9 @@
 ## Palvelu drinkkireseptien hakemiseen
 
 [Demo drinkkiarkistosta](https://drinkarchive.herokuapp.com/)
+Demon testitunnukset
+käyttäjätunnus: test
+salasana: 123456
 
 Drinkkireseptit kuvaavat cocktaileja ja muita juomasekoituksia. Reseptejä voi hakea juoman nimeen liittyvällä hakusanalla, jonkin ainesosan tai drinkin tyypin (alkudrinkki, cocktail, shotti,jne) mukaan. Reseptejä voi tarkastella myös listana, aakkosjärjestyksen, ainesosan tai juoman tyypin mukaan. 
 
