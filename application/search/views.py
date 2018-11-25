@@ -22,7 +22,7 @@ def search_drinks():
                     " FROM drink"
                     " JOIN drink_ingredient ON drink_ingredient.drink_id = drink.id"
                     " JOIN ingredient ON ingredient.id = drink_ingredient.ingredient_id"
-                    " AND ingredient.id == :id").params(id=id)
+                    " AND ingredient.id = :id").params(id=id)
         res = list(db.engine.execute(stmt))
         return render_template("search/results.html", results=res, query=name)
 
