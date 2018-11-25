@@ -12,7 +12,7 @@
   <tbody>
     {% for ingredient in ingredients %}
     <tr>
-      <td>{{ ingredient.name }}</td>
+      <td><a href="{{url_for('search_drinks')}}?ingredient={{ingredient.id}}">{{ ingredient.name }}</a></td>
       <td>{{ ingredient.unit }}</td>
       <td>
         <a href="{{url_for('ingredients_edit', ingredient_id=ingredient.id)}}"><button class="btn btn-primary">Muokkaa</button></a>

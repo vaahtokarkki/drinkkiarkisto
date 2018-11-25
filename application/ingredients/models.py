@@ -9,7 +9,6 @@ class Ingredient(Base):
 
     drink = db.relationship('DrinkIngredient', back_populates='ingredient')
 
-
     def __init__(self, name, unit):
         self.name = name
         self.unit = unit

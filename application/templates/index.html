@@ -19,13 +19,13 @@
 </div>
 <div class="row">
     <div class="col-sm-3">
-        <button class="btn btn-outline-primary">Selaa kaikkia drinkkejä</button>
+        <a href="{{ url_for('drinks_index') }} " class="btn btn-outline-primary">Selaa kaikkia drinkkejä</a>
     </div>
     <div class="col-sm-3">
-        <button class="btn btn-outline-primary">Selaa kaikkia ainesosia</button>
+        <a href="{{ url_for('ingredients_index') }} " class="btn btn-outline-primary">Selaa kaikkia ainesosia</a>
     </div>
     <div class="col-sm-3">
-        <button class="btn btn-outline-primary">Selaa kaikkia avainsanoja</button>
+        <a href="{{ url_for('keywords_index') }} " class="btn btn-outline-primary">Selaa kaikkia avainsanoja</a>
     </div>
 </div>
 {% endblock %}
