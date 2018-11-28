@@ -1,6 +1,5 @@
-from application import app, db
+from application import app, db, login_required
 from flask import render_template, request, url_for, redirect
-from flask_login import login_required
 
 from application.keywords.models import Keyword
 from application.keywords.forms import NewKeywordForm
@@ -12,13 +11,13 @@ def keywords_index():
 
 
 @app.route("/keywords/new/")
-@login_required
+@login_required(role="ANY")
 def keywords_form():
     return render_template("keywords/new.html", form=NewKeywordForm())
 
 
 @app.route("/keywords/", methods=["POST"])
-@login_required
+@login_required(role="ANY")
 def keywords_create():
     form = NewKeywordForm(request.form)
 
@@ -33,7 +32,7 @@ def keywords_create():
     return redirect(url_for("keywords_index"))
 
 @app.route("/keywords/edit/<keyword_id>/", methods=["GET"])
-@login_required
+@login_required(role=3)
 def keywords_edit(keyword_id):
     k = Keyword.query.get(keyword_id)
 
@@ -42,7 +41,7 @@ def keywords_edit(keyword_id):
     return render_template("keywords/edit.html", form=form, keyword=k)
 
 @app.route("/keywords/edit/<keyword_id>/", methods=["POST"])
-@login_required
+@login_required(role=3)
 def keywords_save_edit(keyword_id):
     form = NewKeywordForm(request.form)
     k = Keyword.query.get(keyword_id)
@@ -57,7 +56,7 @@ def keywords_save_edit(keyword_id):
     return redirect(url_for("keywords_index"))
 
 @app.route("/keywords/delete/<keyword_id>/", methods=["GET"])
-@login_required
+@login_required(role=3)
 def keywords_delete(keyword_id):
     keyword = Keyword.query.get(keyword_id)
 

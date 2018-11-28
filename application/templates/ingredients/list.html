@@ -21,8 +21,10 @@
       <td><a href="{{url_for('search_drinks')}}?ingredient={{ingredient.id}}">{{ ingredient.name }}</a></td>
       <td>{{ ingredient.unit }}</td>
       <td>
+        {% if current_user.roles == "3" %}
         <a href="{{url_for('ingredients_edit', ingredient_id=ingredient.id)}}"><button class="btn btn-primary">Muokkaa</button></a>
         <a href="{{url_for('ingredients_delete', ingredient_id=ingredient.id)}}"><button class="btn btn-danger">Poista</button></a>
+        {% endif %}
       </td>
     </tr>
     {% endfor %}

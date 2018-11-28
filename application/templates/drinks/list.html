@@ -14,12 +14,17 @@
       <td>
         <a href="{{url_for('get_drink', drink_id=drink.id)}}">{{ drink.name }}</a>
       </td>
-      <td><a href="{{url_for('drinks_edit', drink_id=drink.id)}}"><button class="btn btn-primary">Muokkaa</button></a> <a href="{{url_for('drinks_delete', drink_id=drink.id)}}"><button class="btn btn-danger">Poista</button></a></td>
+      <td>
+        {% if current_user.roles == "3" %}
+        <a href="{{url_for('drinks_edit', drink_id=drink.id)}}"><button class="btn btn-primary">Muokkaa</button></a>
+        <a href="{{url_for('drinks_delete', drink_id=drink.id)}}"><button class="btn btn-danger">Poista</button></a>
+        {% endif %}
+      </td>
     </tr>
     {% endfor %}
   </tbody>
 </table>
 <p>
-    <a href="/drinks/new"><button class="btn btn-outline-success">Lisää uusi drinkki</button></a>
-  </p>
+  <a href="/drinks/new"><button class="btn btn-outline-success">Lisää uusi drinkki</button></a>
+</p>
 {% endblock %}

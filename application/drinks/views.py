@@ -1,6 +1,6 @@
-from application import app, db
+from application import app, db, login_required
 from flask import render_template, request, url_for, redirect
-from flask_login import current_user, login_required
+from flask_login import current_user
 
 from application.drinks.models import Drink, DrinkIngredient
 from application.drinks.forms import NewDrinkForm, EditDrink
@@ -18,7 +18,7 @@ def get_drink(drink_id):
 
 
 @app.route("/drinks/new/")
-@login_required
+@login_required(role=3)
 def drinks_form():
     return render_template("drinks/new.html", form=NewDrinkForm(), ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
 
@@ -93,7 +93,7 @@ def drinks_create():
 
 
 @app.route("/drinks/edit/<drink_id>/", methods=["GET"])
-@login_required
+@login_required(role="ANY")
 def drinks_edit(drink_id):
     d = Drink.query.get(drink_id)
     form = EditDrink()
@@ -104,7 +104,7 @@ def drinks_edit(drink_id):
 
 
 @app.route("/drinks/edit/<drink_id>/", methods=["POST"])
-@login_required
+@login_required(role=3)
 def drinks_save_edit(drink_id):
     form = EditDrink(request.form)
     d = Drink.query.get(drink_id)
@@ -144,7 +144,7 @@ def drinks_save_edit(drink_id):
 
 
 @app.route("/drinks/delete/<drink_id>/", methods=["GET"])
-@login_required
+@login_required(role=3)
 def drinks_delete(drink_id):
     d = Drink.query.get(drink_id)
 

@@ -1,6 +1,5 @@
-from application import app, db
+from application import app, db, login_required
 from flask import render_template, request, url_for, redirect
-from flask_login import login_required
 
 from application.ingredients.models import Ingredient
 from application.ingredients.forms import NewIngredientForm
@@ -10,15 +9,14 @@ from application.ingredients.forms import NewIngredientForm
 def ingredients_index():
     return render_template("ingredients/list.html", ingredients=Ingredient.query.all())
 
-
 @app.route("/ingredients/new/")
-@login_required
+@login_required(role="ANY")
 def ingredients_form():
     return render_template("ingredients/new.html", form=NewIngredientForm())
 
 
 @app.route("/ingredients/", methods=["POST"])
-@login_required
+@login_required(role="ANY")
 def ingredients_create():
     form = NewIngredientForm(request.form)
 
@@ -33,7 +31,7 @@ def ingredients_create():
     return redirect(url_for("ingredients_index"))
 
 @app.route("/ingredients/edit/<ingredient_id>/", methods=["GET"])
-@login_required
+@login_required(role="ANY")
 def ingredients_edit(ingredient_id):
     ingredient = Ingredient.query.get(ingredient_id)
     
@@ -44,7 +42,7 @@ def ingredients_edit(ingredient_id):
     return render_template("ingredients/edit.html", form=form, ingredient=ingredient)
 
 @app.route("/ingredients/edit/<ingredient_id>/", methods=["POST"])
-@login_required
+@login_required(role=3)
 def ingredients_save_edit(ingredient_id):
     form = NewIngredientForm(request.form)
     ingredient = Ingredient.query.get(ingredient_id)
@@ -60,7 +58,7 @@ def ingredients_save_edit(ingredient_id):
     return redirect(url_for("ingredients_index"))
 
 @app.route("/ingredients/delete/<ingredient_id>/", methods=["GET"])
-@login_required
+@login_required(role=3)
 def ingredients_delete(ingredient_id):
     ingredient = Ingredient.query.get(ingredient_id)
 

@@ -29,9 +29,9 @@
                 <tr>
                     <td>{{i.ingredient.name}}</td>
                     <td>
-                            {% if i.amount > 0 %}
-                            {{i.amount}} {{i.ingredient.unit}}
-                            {% endif %}
+                        {% if i.amount > 0 %}
+                        {{i.amount}} {{i.ingredient.unit}}
+                        {% endif %}
                     </td>
                 </tr>
                 {% endfor %}
@@ -55,9 +55,12 @@
         </p>
         {% endif %}
 
+        {% if current_user.roles == "3" %}
         <p class="card-text">
             <a href="{{url_for('drinks_edit', drink_id=drink.id)}}" class="btn btn-success">Muokkaa</a>
+            <a href="{{url_for('drinks_delete', drink_id=drink.id)}}" class="btn btn-danger">Poista</a>
         </p>
+        {% endif %}
     </div>
 </div>
 {% endblock %}

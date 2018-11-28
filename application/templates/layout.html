@@ -38,14 +38,17 @@
         <ul class="navbar-nav mr-auto">
           {% if current_user.is_authenticated %}
           <li class="nav-item">
-              <span class="navbar-text">Kirjautuneena {{ current_user.name }}</span>
+              <span class="navbar-text">Kirjautuneena {{ current_user.name }} {{current_user.roles}}</span>
           </li>
+          {% if current_user.roles == "3" %}
+          <li class="nav-item">
+              <a class="nav-link" href="#">Ylläpito</a>
+          </li>
+          {% endif %}
           <li class="nav-item">
               <a class="nav-link" href="{{ url_for('view_profile', profile_id=current_user.id) }}">Oma profiili</a>
-
           </li>
           <li class="nav-item">
-            
             <a class="nav-link" href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
           </li>
           {% else %}
