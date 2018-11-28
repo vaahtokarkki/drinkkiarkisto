@@ -38,11 +38,11 @@
         <ul class="navbar-nav mr-auto">
           {% if current_user.is_authenticated %}
           <li class="nav-item">
-              <span class="navbar-text">Kirjautuneena {{ current_user.name }} {{current_user.roles}}</span>
+              <span class="navbar-text">Kirjautuneena {{ current_user.name }}</span>
           </li>
           {% if current_user.roles == "3" %}
           <li class="nav-item">
-              <a class="nav-link" href="#">Ylläpito</a>
+              <a class="nav-link" href="{{ url_for('admin_index') }}">Ylläpito</a>
           </li>
           {% endif %}
           <li class="nav-item">

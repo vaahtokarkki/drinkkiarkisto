@@ -62,6 +62,8 @@ from application.search import views
 
 from application.profile import views
 
+from application.admin import views
+
 from application.auth import models
 from application.auth import views
 from application.auth import role
