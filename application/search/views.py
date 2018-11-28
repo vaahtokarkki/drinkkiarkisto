@@ -18,6 +18,7 @@ def search_drinks():
         if name is not None:
             name = name.name
         
+        #TODO: Filter out not accepted ingredients
         stmt = text(" SELECT drink.name, drink.id"
                     " FROM drink"
                     " JOIN drink_ingredient ON drink_ingredient.drink_id = drink.id"
@@ -33,6 +34,7 @@ def search_drinks():
         if name is not None:
             name = name.name
         
+        #TODO: Filter out not accepted keywords
         res = list(Drink.query.filter(Drink.tags.any(Keyword.id == id)))
         return render_template("search/results.html", results=res, query=name)
         

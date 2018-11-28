@@ -21,9 +21,11 @@ class Drink(Base):
     instructions = db.Column(db.String(250))
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
     user = db.relationship("User", back_populates="drinks")
+    accepted = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, name):
         self.name = name
+        self.accepted = False
 
 class DrinkIngredient(Base):
     __tablename__ = 'drink_ingredient'

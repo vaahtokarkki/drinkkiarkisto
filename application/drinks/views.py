@@ -10,7 +10,7 @@ from application.ingredients.models import Ingredient
 
 @app.route("/drinks", methods=["GET"])
 def drinks_index():
-    return render_template("drinks/list.html", drinks=Drink.query.all())
+    return render_template("drinks/list.html", drinks=Drink.query.filter(Drink.accepted==True))
 
 @app.route("/drinks/<drink_id>", methods=["GET"])
 def get_drink(drink_id):
@@ -18,12 +18,12 @@ def get_drink(drink_id):
 
 
 @app.route("/drinks/new/")
-@login_required(role=3)
+@login_required(role="ANY")
 def drinks_form():
     return render_template("drinks/new.html", form=NewDrinkForm(), ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
 
 @app.route("/drinks/", methods=["POST"])
-@login_required
+@login_required(role="ANY")
 def drinks_create():
     form = NewDrinkForm(request.form)
 
