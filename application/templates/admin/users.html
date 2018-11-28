@@ -1,0 +1,32 @@
+{% extends "layout.html" %}
+
+{% block body %}
+
+<h4>Drinkkiarkistoon rekisteröityneet käyttäjät</h4>
+<table class="table" style="margin-top:50px;">
+    <thead>
+        <tr>
+            <th scope="col">Käyttäjänimi</th>
+            <th scope="col">Nimi</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for user in users %}
+        <tr>
+            <td>
+                <a href="{{url_for('view_profile', profile_id=user.id)}}">{{ user.username }}</a>
+            </td>
+            <td>
+                {{user.name}}
+            </td>
+            <td>
+                <a href="#"><button class="btn btn-success">Muokkaa</button></a>
+                <a href="#"><button class="btn btn-danger">Poista</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}

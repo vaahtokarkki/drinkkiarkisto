@@ -5,9 +5,29 @@
 <h2>Drinkkiarkiston ylläpito</h2>
 
 <h3>Hyväksyntää odottavat drinkit</h3>
-
+<table class="table" style="margin-top:50px;">
+    <thead>
+        <tr>
+            <th scope="col">Drinkki</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for drink in waitingDrinks %}
+        <tr>
+            <td>
+                <a href="{{url_for('get_drink', drink_id=drink.id)}}">{{ drink.name }}</a>
+            </td>
+            <td>
+                <a href="{{url_for('publish_drink', drink_id=drink.id)}}"><button class="btn btn-success">Hyväksy</button></a>
+                <a href="{{url_for('reject_drink', drink_id=drink.id)}}"><button class="btn btn-danger">Poista</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
 <p>
-    <a href="#" class="btn btn-outline-primary">Hallitse käyttäjiä</a>
+    <a href="{{url_for('list_users')}}" class="btn btn-outline-primary">Hallitse käyttäjiä</a>
 </p>
 
 {% endblock %}

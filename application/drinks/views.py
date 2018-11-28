@@ -155,5 +155,30 @@ def drinks_delete(drink_id):
     db.session().commit()
     return redirect(url_for("drinks_index"))
 
+@app.route("/drinks/publish/<drink_id>", methods=["GET"])
+@login_required(role=3)
+def publish_drink(drink_id):
+    d = Drink.query.get(drink_id)
+
+    if not d:
+        return redirect(url_for("admin_index"))
+    
+    d.accepted = True
+    db.session().commit()
+
+    return redirect(url_for("admin_index"))
+
+@app.route("/drinks/reject/<drink_id>", methods=["GET"])
+@login_required(role=3)
+def reject_drink(drink_id):
+    d = Drink.query.get(drink_id)
+    if not d:
+        return redirect(url_for("admin_index"))
+
+    db.session.delete(d)
+    db.session().commit()
+
+    return redirect(url_for("admin_index"))
+
 def getDrinksCount():
     return Drink.query.all().count()
