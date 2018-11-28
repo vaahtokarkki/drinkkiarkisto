@@ -38,8 +38,15 @@
         <ul class="navbar-nav mr-auto">
           {% if current_user.is_authenticated %}
           <li class="nav-item">
-            <a class="nav-link" href="{{ url_for('auth_logout') }}">Kirjautuneena {{ current_user.name }} -- Kirjaudu
-              ulos</a>
+              <span class="navbar-text">Kirjautuneena {{ current_user.name }}</span>
+          </li>
+          <li class="nav-item">
+              <a class="nav-link" href="{{ url_for('view_profile', profile_id=current_user.id) }}">Oma profiili</a>
+
+          </li>
+          <li class="nav-item">
+            
+            <a class="nav-link" href="{{ url_for('auth_logout') }}">Kirjaudu ulos</a>
           </li>
           {% else %}
           <li class="nav-item">

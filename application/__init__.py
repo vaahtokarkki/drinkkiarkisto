@@ -25,6 +25,8 @@ from application.keywords import views
 
 from application.search import views
 
+from application.profile import views
+
 from application.auth import models
 from application.auth import views
 
