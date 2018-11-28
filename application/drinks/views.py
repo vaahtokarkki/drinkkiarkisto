@@ -93,7 +93,7 @@ def drinks_create():
 
 
 @app.route("/drinks/edit/<drink_id>/", methods=["GET"])
-@login_required(role="ANY")
+@login_required(role=3)
 def drinks_edit(drink_id):
     d = Drink.query.get(drink_id)
     form = EditDrink()
