@@ -51,7 +51,7 @@
 
         {% if drink.user is not none %}
         <p class="card-text">
-            <b>Drinkin lisääjä: </b>{{drink.user.username}} ({{drink.user.name}})
+            <b>Drinkin lisääjä: </b><a href="{{ url_for('view_profile', profile_id=drink.user.id) }}">{{drink.user.username}} ({{drink.user.name}})</a>
         </p>
         {% endif %}
 
