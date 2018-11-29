@@ -10,11 +10,11 @@ class User(Base):
     roles = db.Column(db.Integer, db.ForeignKey('role.id'))
     drinks = db.relationship("Drink", backref='account', lazy=True)
 
-    def __init__(self, name, username, password, role):
+    def __init__(self, name, username, password):
         self.name = name
         self.username = username
         self.password = password
-        self.role = 1
+        self.roles = 1
   
     def get_id(self):
         return self.id
