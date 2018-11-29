@@ -19,7 +19,7 @@
     <tr>
       <td><a href="{{url_for('search_drinks')}}?keyword={{keyword.id}}">{{ keyword.name }}</a></td>
       <td>
-        {% if current_user.roles == "3" %}
+        {% if current_user.is_authenticated and current_user.role.name == "ADMIN" %}
         <a href="{{url_for('keywords_edit', keyword_id=keyword.id)}}"><button class="btn btn-primary">Muokkaa</button></a>
         <a href="{{url_for('keywords_delete', keyword_id=keyword.id)}}"><button class="btn btn-danger">Poista</button></a>
         {% endif %}

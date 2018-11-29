@@ -25,7 +25,7 @@ def edit_user(profile_id):
         error = "Profiilia ei löytynyt"
         return render_template("profile/edit.html", authError=error)
 
-    if (int(current_user.id) != int(user.id) and int(current_user.roles) != 3) or int(current_user.roles) == 3:
+    if (current_user.id != user.id and current_user.role.name != "ADMIN") or current_user.role.name is "ADMIN":
         error = "Voit muokata vain omaa profiilia"
         return render_template("profile/edit.html", authError=error)
     

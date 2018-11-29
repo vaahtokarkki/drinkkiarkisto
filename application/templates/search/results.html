@@ -24,7 +24,7 @@
                 <a href="{{url_for('get_drink', drink_id=drink.id)}}">{{ drink.name }}</a>
             </td>
             <td>
-                {% if current_user.roles == "3" %}
+                {% if current_user.is_authenticated and current_user.role.name == "ADMIN" %}
                 <a href="{{url_for('drinks_edit', drink_id=drink.id)}}"><button class="btn btn-primary">Muokkaa</button></a>
                 <a href="{{url_for('drinks_delete', drink_id=drink.id)}}"><button class="btn btn-danger">Poista</button></a>
                 {% endif %}
