@@ -33,7 +33,7 @@
         {% endfor %}
     </tbody>
 </table>
-{% if current_user.id == user.id or current_user.role.name == "ADMIN" %}
+{% if current_user.is_authenticated and (current_user.id == user.id or current_user.role.name == "ADMIN") %}
 <p>
     <a href="{{ url_for('edit_user', profile_id=user.id) }}" class="btn btn-success">Muokkaa profiilia</a>
 </p>

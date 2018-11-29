@@ -5,7 +5,7 @@
 [Demo drinkkiarkistosta](https://drinkarchive.herokuapp.com/)
 **Demon testitunnukset**  
 Normaali käyttäjä:  
-`käyttäjätunnus: test`
+`käyttäjätunnus: test`  
 `salasana: 123456`  
 Ylläpitäjä:  
 `käyttäjätunnus: admin`  
