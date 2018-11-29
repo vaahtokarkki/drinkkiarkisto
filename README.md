@@ -3,12 +3,12 @@
 ## Palvelu drinkkireseptien hakemiseen
 
 [Demo drinkkiarkistosta](https://drinkarchive.herokuapp.com/)
-**Demon testitunnukset** 
+**Demon testitunnukset**  
 Normaali käyttäjä:  
 `käyttäjätunnus: test`
-`salasana: 123456`
+`salasana: 123456`  
 Ylläpitäjä:  
-`käyttäjätunnus: admin`
+`käyttäjätunnus: admin`  
 `salasana: adminadmin`
 
 >Toiminnallisuudessa voi olla tällä hetkellä pieniä puutteita, esimerkiksi uusia ainesosia ja drinkin reseptiä ei voi lisätä samalla lomakkeella. Myös osassa lomakkeiden (lähinnä lisää uusi drinkki) tietojen validoinnissa voi olla vielä aukkoja, johtuen wtform kirjaston hankaluudesta kun kenttiä on dynaaminen määrä.
