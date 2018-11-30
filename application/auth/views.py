@@ -11,7 +11,9 @@ def auth_login():
         return render_template("auth/loginform.html", form = LoginForm())
 
     form = LoginForm(request.form)
-    # mahdolliset validoinnit
+    if not form.validate():
+        print("Mitä")
+        return render_template("auth/loginform.html", form = form)
 
     user = User.query.filter_by(username=form.username.data, password=form.password.data).first()
     if not user:
@@ -37,8 +39,15 @@ def auth_register():
 
     if not form.validate():
         return render_template("auth/register.html", form=form)
-    #TODO: Check if passwords not same
-    #TODO: Check is username already taken
+
+    if form.password.data != form.passwordAgain.data:
+        form.password.errors.append("Salasanat eivät täsmää")
+        return render_template("auth/register.html", form=form)
+
+    checkUser = User.query.filter(User.username == form.username.data).first()
+    if checkUser:
+        form.username.errors.append("Käyttäjänimi varattu")
+        return render_template("auth/register.html", form=form)
 
     user = User(form.name.data, form.username.data, form.password.data)
 
