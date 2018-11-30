@@ -1,6 +1,6 @@
 from application import app, db, login_required
 from flask import render_template, request, redirect, url_for
-from flask_login import current_user
+from flask_login import current_user, logout_user
 
 from application.auth.models import User
 from application.auth.forms import EditForm
@@ -56,3 +56,20 @@ def edit_user_save(profile_id):
     db.session().commit()
 
     return redirect(url_for('view_profile', profile_id=user.id))
+
+@app.route("/profile/delete/<profile_id>", methods=["GET"])
+@login_required(role="ANY")
+def delete_user(profile_id):
+    user = User.query.get(profile_id)
+
+    if (current_user.id != user.id and current_user.role.name != "ADMIN") or current_user.role.name is "ADMIN":
+        return redirect(url_for("index"))
+
+    db.session.delete(user)
+    db.session().commit()
+
+    if current_user.role.name != "ADMIN":
+        logout_user()
+        return redirect(url_for("index"))
+    
+    return redirect(url_for("list_users"))

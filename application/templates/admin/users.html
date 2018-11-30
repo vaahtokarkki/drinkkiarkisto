@@ -22,7 +22,7 @@
             </td>
             <td>
                 <a href="{{url_for('edit_user', profile_id=user.id)}}"><button class="btn btn-success">Muokkaa</button></a>
-                <a href="#"><button class="btn btn-danger">Poista</button></a>
+                <a href="{{url_for('delete_user', profile_id=user.id)}}"><button class="btn btn-danger">Poista</button></a>
             </td>
         </tr>
         {% endfor %}

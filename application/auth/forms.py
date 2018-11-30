@@ -5,7 +5,7 @@ from application.auth.role import Role
   
 class LoginForm(FlaskForm):
     username = StringField("Käyttäjänimi",[validators.Length(min=2)],render_kw={"placeholder": "Käyttäjänimi"})
-    password = PasswordField("Salasana",[validators.Length(min=6)], render_kw={"placeholder": "Salasana"})
+    password = PasswordField("Salasana",[validators.Length(min=5)], render_kw={"placeholder": "Salasana"})
   
     class Meta:
         csrf = False
