@@ -4,8 +4,56 @@
 
 <h2>Drinkkiarkiston ylläpito</h2>
 
-<h3>Hyväksyntää odottavat drinkit</h3>
-<table class="table" style="margin-top:50px;">
+<p style="margin-top:30px;margin-bottom:30px;">Alla listattu hyväksyntää odottavat kohteet</p>
+
+<h5 class="text-muted">Hyväksyntää odottavat ainesosat</h5>
+<table class="table" style="margin-top:30px;">
+    <thead>
+        <tr>
+            <th scope="col">Drinkki</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for ingredient in waitingIngredients %}
+        <tr>
+            <td>
+                {{ ingredient.name }}
+            </td>
+            <td>
+                <a href="{{url_for('publish_ingredient', ingredient_id=ingredient.id)}}"><button class="btn btn-success">Hyväksy</button></a>
+                <a href="{{url_for('reject_ingredient', ingredient_id=ingredient.id)}}"><button class="btn btn-danger">Poista</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h5 class="text-muted">Hyväksyntää odottavat avainsanat</h5>
+<table class="table" style="margin-top:30px;">
+    <thead>
+        <tr>
+            <th scope="col">Drinkki</th>
+            <th scope="col"></th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for keyword in waitingKeywords %}
+        <tr>
+            <td>
+                {{ keyword.name }}
+            </td>
+            <td>
+                <a href="{{url_for('publish_keyword', keyword_id=keyword.id)}}"><button class="btn btn-success">Hyväksy</button></a>
+                <a href="{{url_for('reject_keyword', keyword_id=keyword.id)}}"><button class="btn btn-danger">Poista</button></a>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+<h5 class="text-muted">Hyväksyntää odottavat drinkit</h5>
+<table class="table" style="margin-top:30px;">
     <thead>
         <tr>
             <th scope="col">Drinkki</th>
@@ -26,6 +74,7 @@
         {% endfor %}
     </tbody>
 </table>
+
 <p>
     <a href="{{url_for('list_users')}}" class="btn btn-outline-primary">Hallitse käyttäjiä</a>
 </p>

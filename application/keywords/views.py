@@ -67,3 +67,29 @@ def keywords_delete(keyword_id):
     db.session().commit()
 
     return redirect(url_for("keywords_index"))
+
+@app.route("/keywords/publish/<keyword_id>", methods=["GET"])
+@login_required(role=3)
+def publish_keyword(keyword_id):
+    k = Keyword.query.get(keyword_id)
+
+    if not k:
+        return redirect(url_for("admin_index"))
+    
+    k.accepted = True
+    db.session().commit()
+
+    return redirect(url_for("admin_index"))
+
+@app.route("/keywords/reject/<keyword_id>", methods=["GET"])
+@login_required(role=3)
+def reject_keyword(keyword_id):
+    k = Keyword.query.get(keyword_id)
+
+    if not k:
+        return redirect(url_for("admin_index"))
+    
+    db.session.delete(k)
+    db.session().commit()
+
+    return redirect(url_for("admin_index"))

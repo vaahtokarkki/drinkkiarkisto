@@ -69,3 +69,29 @@ def ingredients_delete(ingredient_id):
     db.session().commit()
 
     return redirect(url_for("ingredients_index"))
+
+@app.route("/ingredients/publish/<ingredient_id>", methods=["GET"])
+@login_required(role=3)
+def publish_ingredient(ingredient_id):
+    i = Ingredient.query.get(ingredient_id)
+
+    if not i:
+        return redirect(url_for("admin_index"))
+    
+    i.accepted = True
+    db.session().commit()
+
+    return redirect(url_for("admin_index"))
+
+@app.route("/ingredients/reject/<ingredient_id>", methods=["GET"])
+@login_required(role=3)
+def reject_ingredient(ingredient_id):
+    i = Ingredient.query.get(ingredient_id)
+
+    if not i:
+        return redirect(url_for("admin_index"))
+    
+    db.session.delete(i)
+    db.session().commit()
+
+    return redirect(url_for("admin_index"))
