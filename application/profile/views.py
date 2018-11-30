@@ -1,5 +1,5 @@
 from application import app, db, login_required
-from flask import render_template
+from flask import render_template, request, redirect, url_for
 from flask_login import current_user
 
 from application.auth.models import User
@@ -36,7 +36,22 @@ def edit_user(profile_id):
 
     return render_template("profile/edit.html", form=form, profile=user)
 
-@app.route("/profile/edit/<profile_id>", methods=["GET"])
+@app.route("/profile/edit/<profile_id>", methods=["POST"])
 @login_required(role="ANY")
 def edit_user_save(profile_id):
-    return None
+    form = EditForm(request.form)
+    
+    user = User.query.get(profile_id)
+
+    if not form.validate():
+        print("wat")
+        print(form.name.data)
+        print(form.username.data)
+        return render_template("profile/edit.html", form=form, profile=user)
+    
+    user.name = form.name.data
+    user.username = form.username.data
+
+    db.session().commit()
+
+    return redirect(url_for('view_profile', profile_id=user.id))

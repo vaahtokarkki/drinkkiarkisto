@@ -35,9 +35,10 @@ def auth_register_form():
 def auth_register():
     form = RegisterForm(request.form)
 
-    #TODO: Check if passwords not same
     if not form.validate():
         return render_template("auth/register.html", form=form)
+    #TODO: Check if passwords not same
+    #TODO: Check is username already taken
 
     user = User(form.name.data, form.username.data, form.password.data)
 

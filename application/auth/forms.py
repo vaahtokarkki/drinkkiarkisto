@@ -20,3 +20,6 @@ class RegisterForm(FlaskForm):
 class EditForm(FlaskForm):
     name = StringField("Nimi", [validators.Length(min=5)], render_kw={"placeholder": "Nimi"})
     username = StringField("Käyttäjänimi",[validators.Length(min=2)],render_kw={"placeholder": "Käyttäjänimi"})
+
+    class Meta:
+        csrf = False
