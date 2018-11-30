@@ -9,7 +9,7 @@ from application.auth.forms import EditForm
 def view_profile(profile_id):
     error = None
     p = User.query.get(profile_id)
-    
+
     if not p:
         error ="Käyttäjätunnusta ei löytynyt."
         return render_template("profile/view.html", user=None, errors=error)
@@ -20,7 +20,6 @@ def view_profile(profile_id):
 @login_required(role="ANY")
 def edit_user(profile_id):
     user = User.query.get(profile_id)
-
     if not user:
         error = "Profiilia ei löytynyt"
         return render_template("profile/edit.html", authError=error)
@@ -29,7 +28,7 @@ def edit_user(profile_id):
         error = "Voit muokata vain omaa profiilia"
         return render_template("profile/edit.html", authError=error)
     
-    form = EditForm()
+    form = EditForm(roles=user.role.id)
 
     form.name.data = user.name
     form.username.data = user.username
@@ -40,17 +39,19 @@ def edit_user(profile_id):
 @login_required(role="ANY")
 def edit_user_save(profile_id):
     form = EditForm(request.form)
-    
     user = User.query.get(profile_id)
+    
+    if current_user.role.name != "ADMIN":
+        form.roles.data = str(user.roles)
 
     if not form.validate():
-        print("wat")
-        print(form.name.data)
-        print(form.username.data)
         return render_template("profile/edit.html", form=form, profile=user)
     
     user.name = form.name.data
     user.username = form.username.data
+
+    if current_user.role.name == "ADMIN":
+        user.roles = form.roles.data
 
     db.session().commit()
 

@@ -1,5 +1,7 @@
 from flask_wtf import FlaskForm
-from wtforms import PasswordField, StringField,validators
+from wtforms import PasswordField, StringField, SelectField, validators
+
+from application.auth.role import Role
   
 class LoginForm(FlaskForm):
     username = StringField("Käyttäjänimi",[validators.Length(min=2)],render_kw={"placeholder": "Käyttäjänimi"})
@@ -20,6 +22,15 @@ class RegisterForm(FlaskForm):
 class EditForm(FlaskForm):
     name = StringField("Nimi", [validators.Length(min=5)], render_kw={"placeholder": "Nimi"})
     username = StringField("Käyttäjänimi",[validators.Length(min=2)],render_kw={"placeholder": "Käyttäjänimi"})
+    
+    def generateSelectOptions(): #Define function as workaround to get options visible on heroku... 
+        rolesList = Role.query.all()
+        ingredientPairs = []
+        for i in rolesList:
+            ingredientPairs.append((str(i.id), str(i.displayName)))
+        return ingredientPairs
+    
+    roles = SelectField('Rooli', choices=generateSelectOptions())
 
     class Meta:
         csrf = False
