@@ -14,7 +14,10 @@ def drinks_index():
 
 @app.route("/drinks/<drink_id>", methods=["GET"])
 def get_drink(drink_id):
-    return render_template("drinks/drink.html", drink=Drink.query.get(drink_id))
+    d = Drink.query.get(drink_id)
+    if d.instructions:
+        d.instructions = d.instructions.split('\n')
+    return render_template("drinks/drink.html", drink=d)
 
 
 @app.route("/drinks/new/")

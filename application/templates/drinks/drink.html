@@ -5,10 +5,12 @@
     <div class="card-body">
         <h5 class="card-title">{{drink.name}}</h5>
 
-        {% if drink.instructions is not none %}
+        {% if drink.instructions is not none and drink.instructions|length > 0 %}
         <h6>Ohjeet</h6>
         <p class="card-text">
-            {{drink.instructions}}
+            {% for line in drink.instructions %}
+                {{line}}<br>
+            {% endfor %}
         </p>
         {% else %}
         <h6>Ei ohjeita</h6>
