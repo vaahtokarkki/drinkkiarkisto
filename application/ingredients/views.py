@@ -1,5 +1,6 @@
 from application import app, db, login_required
 from flask import render_template, request, url_for, redirect
+from flask_login import current_user
 
 from application.ingredients.models import Ingredient
 from application.ingredients.forms import NewIngredientForm
@@ -24,6 +25,11 @@ def ingredients_create():
         return render_template("ingredients/new.html", form=form)
 
     i = Ingredient(form.name.data, form.unit.data)
+
+    if current_user is not None:
+        i.account_id = current_user.id
+        if current_user.role.name == "USER+" or current_user.role.name == "ADMIN":
+            i.accepted = True
 
     db.session().add(i)
     db.session().commit()

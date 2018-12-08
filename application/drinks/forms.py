@@ -11,6 +11,7 @@ class MultiCheckboxField(SelectMultipleField):
 
 class NewDrinkForm(FlaskForm):
     def generateSelectOptions(): #Define function as workaround to get options visible on heroku... 
+        #Ingredient.query.filter(Ingredient.accepted==False, Ingredient.account_id==current_user.id).all()
         ingredientsList = Ingredient.query.all()
         ingredientPairs = []
         for i in ingredientsList:

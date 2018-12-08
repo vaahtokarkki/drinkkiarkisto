@@ -15,13 +15,14 @@ class Drink(Base):
 
     tags = db.relationship('Keyword', secondary=keywords,
                            backref=db.backref('keywords_helper', lazy=True, load_on_pending=False))
-
     ingredients = db.relationship('DrinkIngredient', back_populates='drink')
+    
     name = db.Column(db.String(50), nullable=False)
     instructions = db.Column(db.String(250))
+    accepted = db.Column(db.Boolean, nullable=False)
+    
     account_id = db.Column(db.Integer, db.ForeignKey('account.id'))
     user = db.relationship("User", back_populates="drinks")
-    accepted = db.Column(db.Boolean, nullable=False)
 
     def __init__(self, name):
         self.name = name

@@ -1,5 +1,6 @@
 from application import app, db, login_required
 from flask import render_template, request, url_for, redirect
+from flask_login import current_user
 
 from application.keywords.models import Keyword
 from application.keywords.forms import NewKeywordForm
@@ -7,7 +8,7 @@ from application.keywords.forms import NewKeywordForm
 
 @app.route("/keywords", methods=["GET"])
 def keywords_index():
-    return render_template("keywords/list.html", keywords=Keyword.query.filter(Keyword.accepted==True))
+    return render_template("keywords/list.html", keywords=Keyword.query.filter(Keyword.accepted == True))
 
 
 @app.route("/keywords/new/")
@@ -26,10 +27,16 @@ def keywords_create():
 
     k = Keyword(form.name.data)
 
+    if current_user is not None:
+        k.account_id = current_user
+        if current_user.role.name == "USER+" or current_user.role.name == "ADMIN":
+            k.accepted = True
+
     db.session().add(k)
     db.session().commit()
 
     return redirect(url_for("keywords_index"))
+
 
 @app.route("/keywords/edit/<keyword_id>/", methods=["GET"])
 @login_required(role=3)
@@ -39,6 +46,7 @@ def keywords_edit(keyword_id):
     form = NewKeywordForm()
     form.name.data = k.name
     return render_template("keywords/edit.html", form=form, keyword=k)
+
 
 @app.route("/keywords/edit/<keyword_id>/", methods=["POST"])
 @login_required(role=3)
@@ -55,6 +63,7 @@ def keywords_save_edit(keyword_id):
 
     return redirect(url_for("keywords_index"))
 
+
 @app.route("/keywords/delete/<keyword_id>/", methods=["GET"])
 @login_required(role=3)
 def keywords_delete(keyword_id):
@@ -62,11 +71,12 @@ def keywords_delete(keyword_id):
 
     if keyword is None:
         return redirect(url_for("keywords_index"))
-    
+
     db.session.delete(keyword)
     db.session().commit()
 
     return redirect(url_for("keywords_index"))
+
 
 @app.route("/keywords/publish/<keyword_id>", methods=["GET"])
 @login_required(role=3)
@@ -75,11 +85,12 @@ def publish_keyword(keyword_id):
 
     if not k:
         return redirect(url_for("admin_index"))
-    
+
     k.accepted = True
     db.session().commit()
 
     return redirect(url_for("admin_index"))
+
 
 @app.route("/keywords/reject/<keyword_id>", methods=["GET"])
 @login_required(role=3)
@@ -88,7 +99,7 @@ def reject_keyword(keyword_id):
 
     if not k:
         return redirect(url_for("admin_index"))
-    
+
     db.session.delete(k)
     db.session().commit()
 
