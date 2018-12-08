@@ -85,6 +85,8 @@ def drinks_create():
 
     if current_user is not None:
         d.account_id = current_user.id
+        if current_user.role.name == "USER+" or current_user.role.name == "ADMIN":
+            d.accepted = True
 
     db.session().add(d)
     db.session().commit()
