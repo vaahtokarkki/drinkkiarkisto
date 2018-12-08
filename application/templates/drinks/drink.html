@@ -29,7 +29,7 @@
                 <tr>
                     <td>{{i.ingredient.name}}</td>
                     <td>
-                        {% if i.amount > 0 %}
+                        {% if i.amount is not none %}
                         {{i.amount}} {{i.ingredient.unit}}
                         {% endif %}
                     </td>

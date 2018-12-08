@@ -53,7 +53,10 @@ def drinks_create():
                 continue
 
             try:
-                amount = float(form.amount.data)
+                if ingredient.unit == "":
+                    amount = None
+                else:
+                    amount = float(form.amount.data)
             except:
                 form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"] 
                 valid = False
@@ -65,7 +68,10 @@ def drinks_create():
         id = request.form.get("ingredients-"+str(i))
         ingredient = Ingredient.query.get(id)
         try:
-            amount = float(request.form.get("amount-"+str(i)))
+            if ingredient.unit == "":
+                amount = None
+            else:
+                amount = float(request.form.get("amount-"+str(i)))
         except:
             form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"]
             valid = False

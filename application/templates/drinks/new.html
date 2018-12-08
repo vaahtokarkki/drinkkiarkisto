@@ -3,9 +3,12 @@
 <h2>Lisää uusi drinkki</h2>
 <div class="alert alert-info">
   Anna drinkille kuvaava nimi ja mahdolliset valmistusohjeet. Ainesosia saa lisättyä "Lisää ainesosia" -napista. <br>
-  Jos ainesosalla ei ole yksikköä (esim. jää) aseta määräksi 0.<br>
   Toistaiseksi ainesosat ja avainsanat täytyy lisätä erikseen (selaa sivun kautta), jos niitä ei löydy tietokannasta valmiiksi.<br>
+  {% if current_user.is_authenticated and current_user.role.name == "USER" %}
   Kun olet lisännyt drinkin, ylläpidon täytyy hyväksyä se ennen kuin drinkki näkyy julkisesti.
+  {% else %}
+  <b>Olet etuoikeutettu käyttäjä, joten uusi drinkkisi tulee heti julkisesti näkyville.</b>
+  {% endif %}
 </div>
 <h4 class="text-muted">Täydä tiedot</h4>
 <form method="POST" action="{{ url_for('drinks_create') }}">
@@ -92,7 +95,6 @@
   var amount = 0; 
   function createInput() {
     amount++;
-    console.log(amount)
     var cloned = $("#selectGroup").clone();
     cloned.attr("id", "");
     cloned.find("select").attr("id", "ingredients-" + amount).attr("name", "ingredients-" + (amount));
