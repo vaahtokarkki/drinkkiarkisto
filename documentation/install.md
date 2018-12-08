@@ -52,11 +52,11 @@ Etusivulla voit hakea vapaalla sanahaulla drinkkejä. Tuloksissa on kaikki drink
 
 ### Drinkin lisääminen
 
-Lisätäksesi drinkin tarvitset käyttäjätunnuksen. Kun olet kirjautunut sisään, voit yläpalkista valita *Lisää uusi drinkki* ja pääset luomaan drinkin. Anna drinkille kuvaava niimi ja kirjoita sille mahdolliset valmistusohjeet, kuten missä järjestyksessä ainesosat kuuluu lisätä. Lisää drinkin ainesosat valitsemalla kukin niistä luettelosta ja antamalla määrä. Yksikkö jossa muodossa ainesosan määrä annetaan, on ilmoitettu ainesosan vieressä sulkuihin merkattuna. Lisää ainesosia drinkkiin saat lisättyä *Lisää ainesosa* napista. Lopuksi valitse ruksittamalla mahdolliset avainsanat drinkille, esimerkiksi jos drinkki on tunnettu jollakin muulla nimellä ja mahdolliset kategoriat.
+Lisätäksesi drinkin tarvitset käyttäjätunnuksen. Kun olet kirjautunut sisään, voit yläpalkista valita *Lisää uusi drinkki* ja pääset luomaan drinkin. Anna drinkille kuvaava nimi ja kirjoita sille mahdolliset valmistusohjeet, kuten missä järjestyksessä ainesosat kuuluu lisätä. Lisää drinkin ainesosat valitsemalla kukin niistä luettelosta ja antamalla määrä. Yksikkö jossa muodossa ainesosan määrä annetaan, on ilmoitettu ainesosan vieressä sulkuihin merkattuna. Lisää ainesosia drinkkiin saat lisättyä *Lisää ainesosa* napista. Lopuksi valitse ruksittamalla mahdolliset avainsanat drinkille, esimerkiksi jos drinkki on tunnettu jollakin muulla nimellä ja mahdolliset kategoriat.
 
 #### Uusien ainesosien ja avainsanojen lisääminen
 
-Jos palvelusta ei löydy haluamiasi ainesosia tai drinkkejä, voit lisätä ne erikseen *Selaa ainesosia* ja *Selaa avainsanoja* sivujen kautta. Myös näiden lisäämisene tarvitset käyttäjätunnukset. 
+Jos palvelusta ei löydy haluamiasi ainesosia tai drinkkejä, voit lisätä ne erikseen *Selaa ainesosia* ja *Selaa avainsanoja* sivujen kautta. Myös näiden lisäämiseen tarvitset käyttäjätunnukset. 
 
 ## Käyttäjäprofiilit
 
@@ -66,7 +66,7 @@ Pääset tarkastelemaan omaa profiiliasi kun olet kirjautunut sisään yläpalki
 
 ## Ylläpitäjien ominaisuudet
 
-Ylläpitäjästatuksen omaavilla käyttäjillä sivun yläpalkissa on linkki ylläpitosivulle. Sivulla on listattuna uudet, hyväksyntää odottavat drinkit, ainesosat ja avainsanat. Jokaisen hyväksyntää odottavan kohteen vieressä on nappi jolla sen voi hyväksyä ja kohde tulee julkisesti näkyviin, tai sen voi poistaa kokonaan. **HUOM:** On syytä hyväksyä ensin uudet ainesosat ja avainsanat. Muuten julkisesti näkyvillä olevassa drinkissä voi olla hyväksymättömiä ainesosia ja avainsanoja, jolloin ne eivät näy käyttäjille ja lopputulos drinkistä voi olla sekava.
+Ylläpitäjästatuksen omaavilla käyttäjillä sivun yläpalkissa on linkki ylläpitosivulle. Sivulla on listattuna uudet, hyväksyntää odottavat drinkit, ainesosat ja avainsanat. Jokaisen hyväksyntää odottavan kohteen vieressä on nappi jolla sen voi hyväksyä ja kohde tulee julkisesti näkyviin, tai sen voi poistaa kokonaan. **Huom:** On syytä hyväksyä ensin uudet ainesosat ja avainsanat. Muuten julkisesti näkyvillä olevassa drinkissä voi olla hyväksymättömiä ainesosia ja avainsanoja, jolloin ne eivät näy käyttäjille ja lopputulos drinkistä voi olla sekava.
 
 Ylläpidon etusivulta pääsee *Hallitse käyttäjiä* napista selaamaa, muokkaamaan ja poistamaan palveluun rekisteröityneitä käyttäjiä. Ylläpitäjänä voit myös muuttaa käyttäjien rooleja.  
 

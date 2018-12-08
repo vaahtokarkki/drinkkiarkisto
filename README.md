@@ -2,7 +2,7 @@
 
 ## Palvelu drinkkireseptien hakemiseen
 
-[Demo drinkkiarkistosta](https://drinkarchive.herokuapp.com/)
+[Demo drinkkiarkistosta](https://drinkarchive.herokuapp.com/)  
 **Demon testitunnukset**  
 Normaali käyttäjä:  
 `käyttäjätunnus: test`  
