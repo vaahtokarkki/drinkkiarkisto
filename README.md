@@ -35,5 +35,6 @@ Järjestelmään kirjaudutaan sisään, jos haluaa lisätä omia reseptejä. Tav
 * Muokkaa reseptejä
 
 ## Dokumentaatio
+* [Asennus ja käyttöohjeet](documentation/install.md)
 * [Käyttötapaukset](documentation/userstory.md)
 * [Tietokannan dokumentaatio](documentation/database.md)
