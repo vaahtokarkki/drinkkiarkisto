@@ -8,7 +8,8 @@ from application.keywords.forms import NewKeywordForm
 
 @app.route("/keywords", methods=["GET"])
 def keywords_index():
-    return render_template("keywords/list.html", keywords=Keyword.query.filter(Keyword.accepted == '1'))
+    keywords = Keyword.query.filter(Keyword.accepted == '1').order_by(Keyword.name).all()
+    return render_template("keywords/list.html", keywords=keywords)
 
 
 @app.route("/keywords/new/")
@@ -25,10 +26,11 @@ def keywords_create():
     if not form.validate():
         return render_template("keywords/new.html", form=form)
 
-    k = Keyword(form.name.data)
+    name = str(form.name.data).capitalize()
+    k = Keyword(name)
 
     if current_user is not None:
-        k.account_id = current_user
+        k.account_id = current_user.id
         if current_user.role.name == "USER+" or current_user.role.name == "ADMIN":
             k.accepted = True
 
