@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
 
 {% block body %}
+{% if not drink.accepted %}
+<div class="alert alert-danger">
+    <p>Valitettavasti drinkkiä ei ole vielä hyväksytty.</p>
+</div>
+{% else %}
 <div class="card" style="width:70%">
     <div class="card-body">
         <h5 class="card-title">{{drink.name}}</h5>
@@ -65,4 +70,5 @@
         {% endif %}
     </div>
 </div>
+{% endif %}
 {% endblock %}

@@ -6,9 +6,9 @@
     {{errors}}
 </div>
 {%else%}
-<h6 class="text-muted">Profiili</h6>
+<h6 class="text-muted">Profiili: </h6>
 <h2>{{ user.username }}</h2>
-<h5>Käyttäjänimi: {{ user.name }}</h5>
+<h5>Nimi: {{ user.name }}</h5>
 <p>Status: {{user.role.displayName}}</p>
 <h5 class="text-muted" style="margin-top:30px;">Käyttäjän lisäämät drinkit:</h5>
 <table class="table">

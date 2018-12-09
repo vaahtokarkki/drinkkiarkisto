@@ -60,8 +60,10 @@ def drinks_create():
                     amount = None
                 else:
                     amount = float(form.amount.data)
+                    if amount <= 0:
+                        raise Exception()
             except:
-                form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"] 
+                form.ingredientError = ["Ainesosien määrät täytyvät olla positiivisia numeroita"] 
                 valid = False
                 continue
                 
@@ -75,8 +77,10 @@ def drinks_create():
                 amount = None
             else:
                 amount = float(request.form.get("amount-"+str(i)))
+                if amount <= 0:
+                        raise Exception()
         except:
-            form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"]
+            form.ingredientError = ["Ainesosien määrät täytyvät olla positiivisia numeroita"]
             valid = False
             continue
         
@@ -135,12 +139,17 @@ def drinks_save_edit(drink_id):
         valid = False
 
     for i in range(1,len(d.ingredients)+1):
-        try:
-            amount = int(request.form.get("amount-"+str(i)))
-        except:
-            form.ingredientError = ["Ainesosien määrät täytyvät olla numeroita"]
-            valid = False
-            continue
+        if d.ingredients[i-1].ingredient.unit == "":
+            amount = None
+        else:
+            try:
+                amount = int(request.form.get("amount-"+str(i)))
+                if amount <= 0:
+                    raise Exception()
+            except:
+                form.ingredientError = ["Ainesosien määrät täytyvät olla positiivisia numeroita"]
+                valid = False
+                continue
 
         d.ingredients[i-1].amount = amount
 

@@ -1,7 +1,7 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('drinks_save_edit', drink_id=drink.id) }}">
+<form method="POST" action="{{ url_for('drinks_save_edit', drink_id=drink.id) }}" style="padding-bottom: 100px;">
   <div class="form-row">
     <div class="form-group col-md-4">
       <label for="name">{{form.name.label}}</label>
@@ -41,14 +41,18 @@
   {% if drink.ingredients|length > 0 %}
   {% for i in drink.ingredients %}
   <div class="form-row">
-    <div class="form-group col-xs-2">
+    <div class="form-group col-sm-2">
       <label for="amount">Määrä</label>
-      <input class="form-control" value="{{i.amount}}" name="amount-{{loop.index}}"> 
+      {% if i.amount is none %}
+      <input class="form-control" value="" name="amount-{{loop.index}}">
+      {% else %}
+      <input class="form-control" value="{{i.amount}}" name="amount-{{loop.index}}">
+      {% endif %}
     </div>
-    <div class="form-group col-xs-2">
+    <div class="form-group col-sm-1" style="padding-top:35px;">
       {{i.ingredient.unit}}
     </div>
-    <div class="form-group col-xs-5">
+    <div class="form-group col-sm-3" style="padding-top:35px;">
       {{i.ingredient.name}}
     </div>
   </div>

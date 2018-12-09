@@ -11,7 +11,7 @@
   {% endif %}
 </div>
 <h4 class="text-muted">Täydä tiedot</h4>
-<form method="POST" action="{{ url_for('drinks_create') }}">
+<form method="POST" action="{{ url_for('drinks_create') }}" style="padding-bottom:100px;">
   {{form.ingredientsAmount}}
 
   <div class="form-row">
@@ -90,6 +90,7 @@
   <input type="submit" value="Lisää drinkki" class="btn btn-success" />
 </form>
 
+
 {% block javascript %}
 <script type="text/javascript">
   var amount = 0; 
@@ -98,7 +99,7 @@
     var cloned = $("#selectGroup").clone();
     cloned.attr("id", "");
     cloned.find("select").attr("id", "ingredients-" + amount).attr("name", "ingredients-" + (amount));
-    cloned.find("input").attr("id", "amount-" + amount).attr("name", "amount-" + amount);
+    cloned.find("input").attr("id", "amount-" + amount).attr("name", "amount-" + amount).val("");
     cloned.appendTo("#ingredientsWrapper");
     $("#ingredientsAmount")[0].value = amount;
   }
