@@ -1,6 +1,7 @@
 from application import app, db, login_required
 from flask import render_template, request, url_for, redirect
 from flask_login import current_user
+from sqlalchemy import collate
 
 from application.ingredients.models import Ingredient
 from application.ingredients.forms import NewIngredientForm
@@ -8,7 +9,13 @@ from application.ingredients.forms import NewIngredientForm
 
 @app.route("/ingredients", methods=["GET"])
 def ingredients_index():
-    return render_template("ingredients/list.html", ingredients=Ingredient.query.filter(Ingredient.accepted=='1'))
+    page = request.args.get('page', 1, type=int)
+    ingredients = Ingredient.query.filter(Ingredient.accepted=='1').order_by(collate(Ingredient.name,'NOCASE')).paginate(page,5,False)
+    next_url = url_for('ingredients_index', page=ingredients.next_num) \
+        if ingredients.has_next else None
+    prev_url = url_for('ingredients_index', page=ingredients.prev_num) \
+        if ingredients.has_prev else None
+    return render_template("ingredients/list.html", ingredients=ingredients, next_url=next_url, prev_url=prev_url, current=page)
 
 @app.route("/ingredients/new/")
 @login_required(role="ANY")

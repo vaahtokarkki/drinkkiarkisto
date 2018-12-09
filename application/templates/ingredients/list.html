@@ -16,7 +16,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for ingredient in ingredients %}
+    {% for ingredient in ingredients.items %}
     <tr>
       <td><a href="{{url_for('search_drinks')}}?ingredient={{ingredient.id}}">{{ ingredient.name }}</a></td>
       <td>{{ ingredient.unit }}</td>
@@ -30,6 +30,34 @@
     {% endfor %}
   </tbody>
 </table>
+<div style="width:auto;margin-left:auto;margin-right:auto;">
+<nav aria-label="...">
+  <ul class="pagination">
+    {% if prev_url %}
+    <li class="page-item">
+      <a class="page-link" href="{{ prev_url }}" tabindex="-1">Edellinen</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#" tabindex="-1">Edellinen</a>
+    </li>
+    {% endif %}
+    <li class="page-item active">
+      <a class="page-link" href="#">{{current}}<span class="sr-only">(current)</span></a>
+    </li>
+    {% if next_url %}
+    <li class="page-item">
+      <a class="page-link" href="{{ next_url }}">Seuraava</a>
+    </li>
+    {% else %}
+    <li class="page-item disabled">
+      <a class="page-link" href="#">Seuraava</a>
+    </li>
+    {% endif %}
+  </ul>
+</nav>
+</div>
+
 <p>
   <a href="/ingredients/new"><button class="btn btn-outline-success">Lisää uusi ainesosa</button></a>
 </p>

@@ -2,6 +2,7 @@ from application import app, db, login_required
 from flask import render_template, request, url_for, redirect
 from flask_login import current_user
 from sqlalchemy.sql import text
+from sqlalchemy import collate
 
 
 from application.drinks.models import Drink, DrinkIngredient
@@ -28,7 +29,7 @@ def drinks_form():
     form = NewDrinkForm()
 
     #Purkkaviritelmä kun wtform ei suostu päivittämään select-valikon vaihtoehtoja
-    ingredientsList = Ingredient.query.order_by(Ingredient.name).all()
+    ingredientsList = Ingredient.query.order_by(collate(Ingredient.name, 'NOCASE')).all()
 
     ingredientPairs = []
     for i in ingredientsList:
