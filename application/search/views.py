@@ -23,7 +23,7 @@ def search_drinks():
                     " FROM drink"
                     " JOIN drink_ingredient ON drink_ingredient.drink_id = drink.id"
                     " JOIN ingredient ON ingredient.id = drink_ingredient.ingredient_id"
-                    " AND drink.accepted = 1"
+                    " AND drink.accepted = '1'"
                     " AND ingredient.id = :id").params(id=id)
         res = list(db.engine.execute(stmt))
         return render_template("search/results.html", results=res, query=name)
@@ -36,13 +36,13 @@ def search_drinks():
             name = name.name
 
         res = Drink.query.filter(
-            Drink.accepted==True,
+            Drink.accepted=='1',
             Drink.tags.any(Keyword.id == id),
-            Drink.tags.any(Keyword.accepted == True)
+            Drink.tags.any(Keyword.accepted == '1')
             ).all()
         return render_template("search/results.html", results=res, query=name)
 
-    results = Drink.query.filter(Drink.accepted == True).filter(
+    results = Drink.query.filter(Drink.accepted == '1').filter(
         Drink.name.contains(form.query.data) |
         Drink.instructions.contains(form.query.data) |
         Drink.ingredients.any(Ingredient.name.contains(form.query.data)) |

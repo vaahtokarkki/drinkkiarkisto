@@ -8,7 +8,7 @@ from application.keywords.forms import NewKeywordForm
 
 @app.route("/keywords", methods=["GET"])
 def keywords_index():
-    return render_template("keywords/list.html", keywords=Keyword.query.filter(Keyword.accepted == True))
+    return render_template("keywords/list.html", keywords=Keyword.query.filter(Keyword.accepted == '1'))
 
 
 @app.route("/keywords/new/")

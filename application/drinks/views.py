@@ -10,7 +10,7 @@ from application.ingredients.models import Ingredient
 
 @app.route("/drinks", methods=["GET"])
 def drinks_index():
-    return render_template("drinks/list.html", drinks=Drink.query.filter(Drink.accepted==True))
+    return render_template("drinks/list.html", drinks=Drink.query.filter(Drink.accepted=='1'))
 
 @app.route("/drinks/<drink_id>", methods=["GET"])
 def get_drink(drink_id):
@@ -130,7 +130,7 @@ def drinks_save_edit(drink_id):
 
     if len(name) < 2 or len(name) > 20:
         form.name.errors = list(form.name.errors)
-        form.name.errors.append("Nimen oltava vähintään 2 merkkiä ja enintään 20 merkkiä ptkä")
+        form.name.errors.append("Nimen oltava vähintään 2 merkkiä ja enintään 20 merkkiä pitkä")
         valid = False
 
     if len(instructions) > 200:

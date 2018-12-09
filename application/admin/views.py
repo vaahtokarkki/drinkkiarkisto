@@ -11,9 +11,9 @@ from application.auth.models import User
 @login_required(role=3)
 def admin_index():
     drinks =[]
-    drinks = Drink.query.filter(Drink.accepted == False)
-    ingredients = Ingredient.query.filter(Ingredient.accepted == False)
-    keywords = Keyword.query.filter(Keyword.accepted == False)
+    drinks = Drink.query.filter(Drink.accepted == '0')
+    ingredients = Ingredient.query.filter(Ingredient.accepted == '0')
+    keywords = Keyword.query.filter(Keyword.accepted == '0')
     print("jee")
     print(drinks)
     return render_template("admin/index.html", waitingDrinks=drinks, waitingIngredients=ingredients, waitingKeywords=keywords)
