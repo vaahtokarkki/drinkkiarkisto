@@ -29,7 +29,7 @@ def drinks_form():
     form = NewDrinkForm()
 
     #Purkkaviritelmä kun wtform ei suostu päivittämään select-valikon vaihtoehtoja
-    ingredientsList = Ingredient.query.order_by(collate(Ingredient.name, 'NOCASE')).all()
+    ingredientsList = Ingredient.query.order_by(Ingredient.name).all()
 
     ingredientPairs = []
     for i in ingredientsList:

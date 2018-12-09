@@ -10,7 +10,7 @@ from application.ingredients.forms import NewIngredientForm
 @app.route("/ingredients", methods=["GET"])
 def ingredients_index():
     page = request.args.get('page', 1, type=int)
-    ingredients = Ingredient.query.filter(Ingredient.accepted=='1').order_by(collate(Ingredient.name,'NOCASE')).paginate(page,5,False)
+    ingredients = Ingredient.query.filter(Ingredient.accepted=='1').order_by(Ingredient.name).paginate(page,5,False)
     next_url = url_for('ingredients_index', page=ingredients.next_num) \
         if ingredients.has_next else None
     prev_url = url_for('ingredients_index', page=ingredients.prev_num) \
