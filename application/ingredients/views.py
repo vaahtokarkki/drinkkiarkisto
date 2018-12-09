@@ -31,7 +31,8 @@ def ingredients_create():
     if not form.validate():
         return render_template("ingredients/new.html", form=form)
 
-    i = Ingredient(form.name.data, form.unit.data)
+    name = str(form.name.data).capitalize()
+    i = Ingredient(name, form.unit.data)
 
     if current_user is not None:
         i.account_id = current_user.id

@@ -13,7 +13,8 @@ from application.ingredients.models import Ingredient
 
 @app.route("/drinks", methods=["GET"])
 def drinks_index():
-    return render_template("drinks/list.html", drinks=Drink.query.filter(Drink.accepted=='1'))
+    drinks = Drink.query.filter(Drink.accepted=='1').order_by(Drink.name).all()
+    return render_template("drinks/list.html", drinks=drinks)
 
 @app.route("/drinks/<drink_id>", methods=["GET"])
 def get_drink(drink_id):
@@ -44,7 +45,7 @@ def drinks_create():
     form = NewDrinkForm(request.form)
 
     valid = True
-    name = form.name.data
+    name = str(form.name.data).capitalize()
     instructions = form.instructions.data
 
     if len(name) < 2 or len(name) > 20:

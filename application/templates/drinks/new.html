@@ -3,7 +3,8 @@
 <h2>Lisää uusi drinkki</h2>
 <div class="alert alert-info">
   Anna drinkille kuvaava nimi ja mahdolliset valmistusohjeet. Ainesosia saa lisättyä "Lisää ainesosia" -napista. <br>
-  Toistaiseksi ainesosat ja avainsanat täytyy lisätä erikseen (selaa sivun kautta), jos niitä ei löydy tietokannasta valmiiksi.<br>
+  Toistaiseksi ainesosat ja avainsanat täytyy lisätä erikseen (selaa sivun kautta), jos niitä ei löydy tietokannasta
+  valmiiksi.<br>
   {% if current_user.is_authenticated and current_user.role.name == "USER" %}
   Kun olet lisännyt drinkin, ylläpidon täytyy hyväksyä se ennen kuin drinkki näkyy julkisesti.
   {% else %}
@@ -52,13 +53,13 @@
 
   <div id="ingredientsWrapper">
     <div class="form-row" id="selectGroup">
-      <div class="form-group col-xs-2">
-        <label for="amount">{{form.amount.label}}</label>
-        {{form.amount(class_="form-control")}}
-      </div>
-      <div class="form-group col-xs-5">
+      <div class="form-group col-3">
         <label for="ingredients">{{form.ingredients.label}}</label>
         {{form.ingredients(class_="form-control",name_="ingredients[]")}}
+      </div>
+      <div class="form-group col-1">
+        <label for="amount">{{form.amount.label}}</label>
+        {{form.amount(class_="form-control")}}
       </div>
     </div>
   </div>
@@ -75,8 +76,8 @@
   {% endif %}
 
   <div class="form-row">
-      <div class="form-group col-md-5">
-    <button class="btn btn-primary" type="button" onclick="createInput()">Lisää aineosia</button>
+    <div class="form-group col-md-5">
+      <button class="btn btn-primary" type="button" onclick="createInput()">Lisää aineosia</button>
     </div>
   </div>
 
@@ -93,7 +94,7 @@
 
 {% block javascript %}
 <script type="text/javascript">
-  var amount = 0; 
+  var amount = 0;
   function createInput() {
     amount++;
     var cloned = $("#selectGroup").clone();
