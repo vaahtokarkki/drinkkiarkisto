@@ -14,8 +14,6 @@ def admin_index():
     drinks = Drink.query.filter(Drink.accepted == '0')
     ingredients = Ingredient.query.filter(Ingredient.accepted == '0')
     keywords = Keyword.query.filter(Keyword.accepted == '0')
-    print("jee")
-    print(drinks)
     return render_template("admin/index.html", waitingDrinks=drinks, waitingIngredients=ingredients, waitingKeywords=keywords)
 
 

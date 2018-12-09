@@ -12,7 +12,7 @@ class MultiCheckboxField(SelectMultipleField):
 class NewDrinkForm(FlaskForm):
     def generateSelectOptions(): #Define function as workaround to get options visible on heroku... 
         #Ingredient.query.filter(Ingredient.accepted==False, Ingredient.account_id==current_user.id).all()
-        ingredientsList = Ingredient.query.all()
+        ingredientsList = Ingredient.query.order_by(Ingredient.name).all()
         ingredientPairs = []
         for i in ingredientsList:
             ingredientPairs.append((i.id, i.name+" ("+i.unit+")"))
@@ -25,7 +25,7 @@ class NewDrinkForm(FlaskForm):
         return keywordPairs
 
     name = StringField("Drinkin nimi")
-    amount = DecimalField("Määrä")
+    amount = StringField("Määrä") #Validointi numeroille tehdään views.py tiedostossa
     instructions = TextAreaField("Valmistusohjeet")
 
     ingredientsAmount = HiddenField(default=0)

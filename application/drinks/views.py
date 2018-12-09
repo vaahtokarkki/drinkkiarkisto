@@ -1,6 +1,8 @@
 from application import app, db, login_required
 from flask import render_template, request, url_for, redirect
 from flask_login import current_user
+from sqlalchemy.sql import text
+
 
 from application.drinks.models import Drink, DrinkIngredient
 from application.drinks.forms import NewDrinkForm, EditDrink
@@ -23,7 +25,17 @@ def get_drink(drink_id):
 @app.route("/drinks/new/")
 @login_required(role="ANY")
 def drinks_form():
-    return render_template("drinks/new.html", form=NewDrinkForm(), ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
+    form = NewDrinkForm()
+
+    #Purkkaviritelmä kun wtform ei suostu päivittämään select-valikon vaihtoehtoja
+    ingredientsList = Ingredient.query.order_by(Ingredient.name).all()
+
+    ingredientPairs = []
+    for i in ingredientsList:
+        ingredientPairs.append((i.id, i.name+" ("+i.unit+")"))
+    form.ingredients.choices = ingredientPairs
+
+    return render_template("drinks/new.html", form=form, ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
 
 @app.route("/drinks/", methods=["POST"])
 @login_required(role="ANY")
@@ -48,7 +60,7 @@ def drinks_create():
     d = Drink(name)
     d.instructions = instructions
     ingredientAmount = int(form.ingredientsAmount.data)
-    
+    print(form.amount.data)
     for i in range(0, ingredientAmount+1):
         if i is 0:
             ingredient = Ingredient.query.get(form.ingredients.data)
@@ -59,7 +71,8 @@ def drinks_create():
                 if ingredient.unit == "":
                     amount = None
                 else:
-                    amount = float(form.amount.data)
+                    amount = str(form.amount.data).replace(",",".")
+                    amount = float(amount)
                     if amount <= 0:
                         raise Exception()
             except:
@@ -76,7 +89,8 @@ def drinks_create():
             if ingredient.unit == "":
                 amount = None
             else:
-                amount = float(request.form.get("amount-"+str(i)))
+                amount = str(request.form.get("amount-"+str(i))).replace(",",".")
+                amount = float(amount)
                 if amount <= 0:
                         raise Exception()
         except:

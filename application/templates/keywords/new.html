@@ -1,17 +1,18 @@
 {% extends "layout.html" %}
 
 {% block body %}
-<form method="POST" action="{{ url_for('keywords_create') }}">
+<h2>Lisää uusi avainsana</h2>
+<form method="POST" action="{{ url_for('keywords_create') }}" style="margin-top:50px;">
   <div class="form-group row">
     <label for="name" class="col-sm-2 col-form-label">{{form.name.label}}</label>
-    <div class="col-sm-8">
+    <div class="col-sm-4">
       {{form.name(class_="form-control")}}
     </div>
   </div>
   {% if form.name.errors|length > 0 %}
   <div class="form-group row">
     <div class="col-sm-2"></div>
-    <div class="col-sm-4">
+    <div class="col-sm-6">
       <div class="alert alert-danger">
         <ul>
           {% for error in form.name.errors %}
@@ -24,7 +25,8 @@
   {% endif %}
 
   <div class="form-row">
-    <input type="submit" class="btn btn-success" value="Lisää ainesosa">
+    <div class="col-sm-2"></div>
+    <div class="col-sm-4"><input type="submit" class="btn btn-success" value="Lisää ainesosa"></div>
   </div>
 </form>
 {% endblock %}
