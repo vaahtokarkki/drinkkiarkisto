@@ -29,18 +29,36 @@
     </div>
 </div>
 <div class="row" style="margin-top:50px;">
-    <div class="card" style="width:50%">
-        <div class="card-body">
-            <h5 class="card-title">Tilastoja</h5>
-            <h6 class="card-subtitle mb-2 text-muted">Tällä hetkellä drinkkiarkistossa:</h6>
-            <div class="card-text" style="margin-top:15px;">
-                <table class="table table-sm">
-                    <tr><td>Drinkkejä</td><td>{{stats.drinks}}kpl</td></tr>
-                    <tr><td>Ainesosia</td><td>{{stats.ingredients}}kpl</td></tr>
-                    <tr><td>Avainsanoja</td><td>{{stats.keywords}}kpl</td></tr>
-                </table>
+    <div class="col-md-6">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title">Tilastoja</h5>
+                <h6 class="card-subtitle mb-2 text-muted">Tällä hetkellä drinkkiarkistossa:</h6>
+                <div class="card-text" style="margin-top:15px;">
+                    <table class="table table-sm">
+                        <tr><td>Drinkkejä</td><td>{{stats.drinks}}kpl</td></tr>
+                        <tr><td>Ainesosia</td><td>{{stats.ingredients}}kpl</td></tr>
+                        <tr><td>Avainsanoja</td><td>{{stats.keywords}}kpl</td></tr>
+                    </table>
+                </div>
             </div>
         </div>
     </div>
+    <div class="col-md-6">
+            <div class="card">
+                <div class="card-body">
+                    <h5 class="card-title">Käyttäjätilastoja</h5>
+                    <h6 class="card-subtitle mb-2 text-muted">5 eniten drinkkejä lisänneet käyttäjät:</h6>
+                    <div class="card-text" style="margin-top:15px;">
+                        <table class="table table-sm">
+                            {% for row in stats.userStats %}
+                            <tr><td>{{row.username}}</td><td>{{row.count}}kpl</td></tr>
+                            {% endfor %}
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
 </div>
+
 {% endblock %}
