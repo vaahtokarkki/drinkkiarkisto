@@ -5,6 +5,12 @@
     <div class="card-body">
         <h5 class="card-title">{{drink.name}}</h5>
 
+        {% if not drink.accepted %}
+        <div class="alert alert-danger" style="width:50%;">
+            Drinkkiä ei ole vielä julkaistu!
+        </div>
+        {% endif %}
+
         {% if drink.instructions is not none and drink.instructions|length > 0 %}
         <h6>Ohjeet</h6>
         <p class="card-text">
