@@ -1,18 +1,22 @@
 {% extends "layout.html" %}
 
 {% block body %}
+<h2>Rekisteröidy</h2>
+<div class="alert alert-info" style="margin-top:25px;width:50%">
+    Keksi itsellesi käyttäjätunnus ja salasana (vähintään 6 merkkiä pitkä). Koko nimesi näytetään julkisesti jos lisäät uusia drinkkejä.
+</div>
 {{ error }}
-<form method="POST" action="{{ url_for('auth_register') }}">
+<form method="POST" action="{{ url_for('auth_register') }}" style="margin-top:40px;">
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">{{form.name.label}}</label>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
             {{form.name(class_="form-control")}}
         </div>
     </div>
     {% if form.name.errors|length > 0 %}
     <div class="form-group row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="alert alert-danger">
                 <ul>
                     {% for error in form.name.errors %}
@@ -26,14 +30,14 @@
 
     <div class="form-group row">
         <label for="username" class="col-sm-2 col-form-label">{{form.username.label}}</label>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
             {{form.username(class_="form-control")}}
         </div>
     </div>
     {% if form.username.errors|length > 0 %}
     <div class="form-group row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="alert alert-danger">
                 <ul>
                     {% for error in form.username.errors %}
@@ -47,14 +51,14 @@
 
     <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label">{{form.password.label}}</label>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
             {{form.password(class_="form-control")}}
         </div>
     </div>
     {% if form.password.errors|length > 0 %}
     <div class="form-group row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="alert alert-danger">
                 <ul>
                     {% for error in form.password.errors %}
@@ -68,12 +72,14 @@
 
     <div class="form-group row">
         <label for="passwordAgain" class="col-sm-2 col-form-label">{{form.passwordAgain.label}}</label>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
             {{form.passwordAgain(class_="form-control")}}
         </div>
     </div>
     <div class="form-row">
-        <input type="submit" value="Rekisteröidy" class="btn btn-success">
+        <div class="col-sm-2"></div>
+        <div class="col-sm-4"><input type="submit" value="Rekisteröidy" class="btn btn-success"></div>
+
     </div>
 </form>
 {% endblock %}

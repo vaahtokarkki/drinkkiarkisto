@@ -1,8 +1,8 @@
 {% extends "layout.html" %}
 
 {% block body %}
-
-<form method="POST" action="{{ url_for('auth_login') }}">
+<h2>Kirjaudu sisään</h2>
+<form method="POST" action="{{ url_for('auth_login') }}" style="margin-top:50px;">
     {% if error %}
     <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label"></label>
@@ -16,14 +16,14 @@
 
     <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label">{{form.username.label}}</label>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
             {{form.username(class_="form-control")}}
         </div>
     </div>
     {% if form.username.errors|length > 0 %}
     <div class="form-group row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="alert alert-danger">
                 <ul>
                     {% for error in form.username.errors %}
@@ -37,14 +37,14 @@
 
     <div class="form-group row">
         <label for="password" class="col-sm-2 col-form-label">{{form.password.label}}</label>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
             {{form.password(class_="form-control")}}
         </div>
     </div>
     {% if form.password.errors|length > 0 %}
     <div class="form-group row">
         <div class="col-sm-2"></div>
-        <div class="col-sm-4">
+        <div class="col-sm-6">
             <div class="alert alert-danger">
                 <ul>
                     {% for error in form.password.errors %}
