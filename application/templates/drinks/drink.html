@@ -1,11 +1,6 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{% if not drink.accepted %}
-<div class="alert alert-danger">
-    <p>Valitettavasti drinkkiä ei ole vielä hyväksytty.</p>
-</div>
-{% else %}
 <div class="card" style="width:70%">
     <div class="card-body">
         <h5 class="card-title">{{drink.name}}</h5>
@@ -33,6 +28,7 @@
             </thead>
             <tbody>
                 {% for i in drink.ingredients %}
+                {% if i.ingredient.accepted %}
                 <tr>
                     <td>{{i.ingredient.name}}</td>
                     <td>
@@ -41,6 +37,7 @@
                         {% endif %}
                     </td>
                 </tr>
+                {% endif %}
                 {% endfor %}
             </tbody>
         </table>
@@ -48,9 +45,11 @@
 
         {% if drink.tags|length > 0 %}
         <p class="card-text"><b>Avainsanat</b></p>
-        <ul class="list-group list-group-flush">
+        <ul class="list-group listauthen-group-flush">
             {% for keyword in drink.tags %}
+            {% if keyword.accepted %}
             <li class="list-group-item">{{keyword.name}}</li>
+            {% endif %}
             {% endfor %}
         </ul>
         {% endif %}
@@ -70,5 +69,4 @@
         {% endif %}
     </div>
 </div>
-{% endif %}
-{% endblock %}
+{% endblock %}hello
