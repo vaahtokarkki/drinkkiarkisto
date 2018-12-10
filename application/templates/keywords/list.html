@@ -15,7 +15,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for keyword in keywords %}
+    {% for keyword in keywords.items %}
     <tr>
       <td><a href="{{url_for('search_drinks')}}?keyword={{keyword.id}}">{{ keyword.name }}</a></td>
       <td>
@@ -28,6 +28,9 @@
     {% endfor %}
   </tbody>
 </table>
+
+{% include "pagination.html" %}
+
 <p>
   <a href="/keywords/new"><button class="btn btn-outline-success">Lisää uusi avainsana</button></a>
 </p>

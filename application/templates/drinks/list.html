@@ -10,7 +10,7 @@
     </tr>
   </thead>
   <tbody>
-    {% for drink in drinks %}
+    {% for drink in drinks.items %}
     <tr>
       <td>
         <a href="{{url_for('get_drink', drink_id=drink.id)}}">{{ drink.name }}</a>
@@ -25,6 +25,9 @@
     {% endfor %}
   </tbody>
 </table>
+
+{% include "pagination.html" %}
+
 <p>
   <a href="/drinks/new"><button class="btn btn-outline-success">Lisää uusi drinkki</button></a>
 </p>

@@ -8,6 +8,7 @@ Sovellus toimii Python 3.6 versiolla, lisäksi tarvitset PIP pakettienhallinnan 
 $ git clone https://github.com/vaahtokarkki/drinkkiarkisto.git
 $ cd drinkkiarkisto
 $ python3 -m venv venv
+$ source venv/bin/activate
 $ pip install -r requirements.txt
 $ python3 run.py
 ```

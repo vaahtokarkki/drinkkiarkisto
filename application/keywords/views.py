@@ -8,8 +8,13 @@ from application.keywords.forms import NewKeywordForm
 
 @app.route("/keywords", methods=["GET"])
 def keywords_index():
-    keywords = Keyword.query.filter(Keyword.accepted == '1').order_by(Keyword.name).all()
-    return render_template("keywords/list.html", keywords=keywords)
+    page = request.args.get('page', 1, type=int)
+    keywords = Keyword.query.filter(Keyword.accepted == '1').order_by(Keyword.name).paginate(page,5,False)
+    next_url = url_for('keywords_index', page=keywords.next_num) \
+        if keywords.has_next else None
+    prev_url = url_for('keywords_index', page=keywords.prev_num) \
+        if keywords.has_prev else None
+    return render_template("keywords/list.html", keywords=keywords, next_url=next_url, prev_url=prev_url, current=page)
 
 
 @app.route("/keywords/new/")

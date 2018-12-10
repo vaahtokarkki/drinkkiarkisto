@@ -13,8 +13,13 @@ from application.ingredients.models import Ingredient
 
 @app.route("/drinks", methods=["GET"])
 def drinks_index():
-    drinks = Drink.query.filter(Drink.accepted=='1').order_by(Drink.name).all()
-    return render_template("drinks/list.html", drinks=drinks)
+    page = request.args.get('page', 1, type=int)
+    drinks = Drink.query.filter(Drink.accepted=='1').order_by(Drink.name).paginate(page,5,False)
+    next_url = url_for('drinks_index', page=drinks.next_num) \
+        if drinks.has_next else None
+    prev_url = url_for('drinks_index', page=drinks.prev_num) \
+        if drinks.has_prev else None
+    return render_template("drinks/list.html", drinks=drinks,next_url=next_url, prev_url=prev_url, current=page)
 
 @app.route("/drinks/<drink_id>", methods=["GET"])
 def get_drink(drink_id):
