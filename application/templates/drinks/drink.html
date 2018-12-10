@@ -1,6 +1,11 @@
 {% extends "layout.html" %}
 
 {% block body %}
+{% if form is none %}
+<div class="alert alert-danger">
+    Drinkkiä ei löytynyt!
+</div>
+{%else%}
 <div class="card" style="width:70%">
     <div class="card-body">
         <h5 class="card-title">{{drink.name}}</h5>
@@ -75,4 +80,5 @@
         {% endif %}
     </div>
 </div>
-{% endblock %}hello
+{% endif %}
+{% endblock %}

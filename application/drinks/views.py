@@ -24,7 +24,7 @@ def drinks_index():
 @app.route("/drinks/<drink_id>", methods=["GET"])
 def get_drink(drink_id):
     d = Drink.query.get(drink_id)
-    if d.instructions:
+    if d is not None and d.instructions:
         d.instructions = d.instructions.split('\n')
     return render_template("drinks/drink.html", drink=d)
 
@@ -132,6 +132,8 @@ def drinks_create():
 @login_required(role=3)
 def drinks_edit(drink_id):
     d = Drink.query.get(drink_id)
+    if d is None:
+        return render_template("drinks/edit.html", form=None)
     form = EditDrink()
     form.name.data = d.name
     form.instructions.data = d.instructions
