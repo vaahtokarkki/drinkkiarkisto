@@ -24,10 +24,19 @@ def index():
         user = User.query.get(row[0])
         userStats.append({'username': user.username, 'count': row[1]})
 
+    stmt = text(" SELECT ROUND(AVG(count),2) FROM ("
+                " SELECT COUNT(drink_ingredient.ingredient_id) as count"
+                " FROM drink"
+                " JOIN drink_ingredient on drink.id = drink_ingredient.drink_id"
+                " WHERE (drink.accepted = '1')"
+                " GROUP BY drink.id)")
+    avgIngredients = db.engine.execute(stmt).fetchone()[0]
+
     stats = {
         "drinks": len(Drink.query.filter(Drink.accepted == '1').all()),
         "ingredients": len(Ingredient.query.filter(Ingredient.accepted == True).all()),
         "keywords": len(Keyword.query.filter(Keyword.accepted == True).all()),
-        "userStats": userStats
+        "userStats": userStats,
+        "avgIngredients":avgIngredients
     }
     return render_template("index.html", form=SearchForm(), stats=stats)
