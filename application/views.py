@@ -29,7 +29,7 @@ def index():
                 " FROM drink"
                 " JOIN drink_ingredient on drink.id = drink_ingredient.drink_id"
                 " WHERE (drink.accepted = '1')"
-                " GROUP BY drink.id)")
+                " GROUP BY drink.id) AS result")
     avgIngredients = db.engine.execute(stmt).fetchone()[0]
 
     stats = {
