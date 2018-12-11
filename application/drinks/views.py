@@ -2,8 +2,6 @@ from application import app, db, login_required
 from flask import render_template, request, url_for, redirect
 from flask_login import current_user
 from sqlalchemy.sql import text
-from sqlalchemy import collate
-
 
 from application.drinks.models import Drink, DrinkIngredient
 from application.drinks.forms import NewDrinkForm, EditDrink
@@ -19,7 +17,7 @@ def drinks_index():
         if drinks.has_next else None
     prev_url = url_for('drinks_index', page=drinks.prev_num) \
         if drinks.has_prev else None
-    return render_template("drinks/list.html", drinks=drinks,next_url=next_url, prev_url=prev_url, current=page)
+    return render_template("drinks/list.html", drinks=drinks, next_url=next_url, prev_url=prev_url, current=page)
 
 @app.route("/drinks/<drink_id>", methods=["GET"])
 def get_drink(drink_id):
@@ -34,21 +32,23 @@ def get_drink(drink_id):
 def drinks_form():
     form = NewDrinkForm()
 
-    #Purkkaviritelmä kun wtform ei suostu päivittämään select-valikon vaihtoehtoja
+    # Purkkaviritelmä kun wtform lataa kannasta
+    # Select-vaihtoehdot vain palvelimen käynnistyksen yhteydessä
     ingredientsList = Ingredient.query.order_by(Ingredient.name).all()
-
     ingredientPairs = []
     for i in ingredientsList:
         ingredientPairs.append((i.id, i.name+" ("+i.unit+")"))
     form.ingredients.choices = ingredientPairs
 
-    return render_template("drinks/new.html", form=form, ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
+    return render_template("drinks/new.html", form=form)
 
 @app.route("/drinks/", methods=["POST"])
 @login_required(role="ANY")
 def drinks_create():
     form = NewDrinkForm(request.form)
 
+    # Lomakkeen validointi tehdään käsin, kun wtformsilla on 
+    # vaikeuksia jos lomake on dynaaminen (kenttien määrä vaihtelee)
     valid = True
     name = str(form.name.data).capitalize()
     instructions = form.instructions.data
@@ -67,7 +67,6 @@ def drinks_create():
     d = Drink(name)
     d.instructions = instructions
     ingredientAmount = int(form.ingredientsAmount.data)
-    print(form.amount.data)
     for i in range(0, ingredientAmount+1):
         if i is 0:
             ingredient = Ingredient.query.get(form.ingredients.data)
@@ -111,7 +110,7 @@ def drinks_create():
         DrinkIngredient(drink=d, ingredient=ingredient, amount=amount)
 
     if not valid:
-        return render_template("drinks/new.html", form=form, ingredients=Ingredient.query.all(), keywords=Keyword.query.all())
+        return render_template("drinks/new.html", form=form)
 
     for id in form.keywords.data:
         k = Keyword.query.get(id)
@@ -134,6 +133,7 @@ def drinks_edit(drink_id):
     d = Drink.query.get(drink_id)
     if d is None:
         return render_template("drinks/edit.html", form=None)
+    
     form = EditDrink()
     form.name.data = d.name
     form.instructions.data = d.instructions
@@ -203,7 +203,7 @@ def drinks_delete(drink_id):
 def publish_drink(drink_id):
     d = Drink.query.get(drink_id)
 
-    if not d:
+    if d is None:
         return redirect(url_for("admin_index"))
     
     d.accepted = True
@@ -211,17 +211,16 @@ def publish_drink(drink_id):
 
     return redirect(url_for("admin_index"))
 
+#Oma funktio vaikka sama, kuin drinks_delete, mutta return-osoite eri.
 @app.route("/drinks/reject/<drink_id>", methods=["GET"])
 @login_required(role=3)
 def reject_drink(drink_id):
     d = Drink.query.get(drink_id)
-    if not d:
+    
+    if d is None:
         return redirect(url_for("admin_index"))
 
     db.session.delete(d)
     db.session().commit()
 
     return redirect(url_for("admin_index"))
-
-def getDrinksCount():
-    return Drink.query.all().count()

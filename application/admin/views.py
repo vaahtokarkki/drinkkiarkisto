@@ -10,7 +10,7 @@ from application.auth.models import User
 @app.route("/admin", methods=["GET"])
 @login_required(role=3)
 def admin_index():
-    drinks =[]
+    drinks = []
     drinks = Drink.query.filter(Drink.accepted == '0')
     ingredients = Ingredient.query.filter(Ingredient.accepted == '0')
     keywords = Keyword.query.filter(Keyword.accepted == '0')

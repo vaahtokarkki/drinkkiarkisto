@@ -1,9 +1,9 @@
 {% extends "layout.html" %}
 
 {% block body %}
-{% if errors %}
+{% if user is none %}
 <div class="alert alert-danger">
-    {{errors}}
+    Käyttäjätunnusta ei löytynyt.
 </div>
 {%else%}
 <h6 class="text-muted">Profiili: </h6>

@@ -9,7 +9,8 @@ from application.keywords.forms import NewKeywordForm
 @app.route("/keywords", methods=["GET"])
 def keywords_index():
     page = request.args.get('page', 1, type=int)
-    keywords = Keyword.query.filter(Keyword.accepted == '1').order_by(Keyword.name).paginate(page,5,False)
+    keywords = Keyword.query.filter(Keyword.accepted == '1').order_by(
+        Keyword.name).paginate(page, 5, False)
     next_url = url_for('keywords_index', page=keywords.next_num) \
         if keywords.has_next else None
     prev_url = url_for('keywords_index', page=keywords.prev_num) \
@@ -90,7 +91,7 @@ def keywords_delete(keyword_id):
 def publish_keyword(keyword_id):
     k = Keyword.query.get(keyword_id)
 
-    if not k:
+    if k is None:
         return redirect(url_for("admin_index"))
 
     k.accepted = True
@@ -98,13 +99,13 @@ def publish_keyword(keyword_id):
 
     return redirect(url_for("admin_index"))
 
-
+#Oma funktio vaikka sama, kuin keywords_delete, mutta return-osoite eri.
 @app.route("/keywords/reject/<keyword_id>", methods=["GET"])
 @login_required(role=3)
 def reject_keyword(keyword_id):
     k = Keyword.query.get(keyword_id)
 
-    if not k:
+    if k is None:
         return redirect(url_for("admin_index"))
 
     db.session.delete(k)
