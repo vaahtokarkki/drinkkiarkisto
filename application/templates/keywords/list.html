@@ -20,8 +20,8 @@
       <td><a href="{{url_for('search_drinks')}}?keyword={{keyword.id}}">{{ keyword.name }}</a></td>
       <td>
         {% if current_user.is_authenticated and current_user.role.name == "ADMIN" %}
-        <a href="{{url_for('keywords_edit', keyword_id=keyword.id)}}"><button class="btn btn-primary">Muokkaa</button></a>
-        <a href="{{url_for('keywords_delete', keyword_id=keyword.id)}}"><button class="btn btn-danger">Poista</button></a>
+        <a href="{{url_for('keywords_edit', keyword_id=keyword.id)}}" class="btn btn-primary">Muokkaa</a>
+        <a href="{{url_for('keywords_delete', keyword_id=keyword.id)}}" class="btn btn-danger" onclick="return confirm('Oletko varma?')">Poista</a>
         {% endif %}
       </td>
     </tr>
@@ -32,6 +32,6 @@
 {% include "pagination.html" %}
 
 <p>
-  <a href="/keywords/new"><button class="btn btn-outline-success">Lisää uusi avainsana</button></a>
+  <a href="/keywords/new" class="btn btn-outline-success">Lisää uusi avainsana</a>
 </p>
 {% endblock %}

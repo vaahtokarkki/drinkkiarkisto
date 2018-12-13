@@ -75,7 +75,7 @@
         {% if current_user.is_authenticated and current_user.role.name == "ADMIN" %}
         <p class="card-text">
             <a href="{{url_for('drinks_edit', drink_id=drink.id)}}" class="btn btn-success">Muokkaa</a>
-            <a href="{{url_for('drinks_delete', drink_id=drink.id)}}" class="btn btn-danger">Poista</a>
+            <a href="{{url_for('drinks_delete', drink_id=drink.id)}}" class="btn btn-danger" onclick="return confirm('Oletko varma?')">Poista</a>
         </p>
         {% endif %}
     </div>

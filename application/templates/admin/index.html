@@ -68,7 +68,7 @@
             </td>
             <td>
                 <a href="{{url_for('publish_drink', drink_id=drink.id)}}"><button class="btn btn-success">Hyväksy</button></a>
-                <a href="{{url_for('reject_drink', drink_id=drink.id)}}"><button class="btn btn-danger">Poista</button></a>
+                <a href="{{url_for('reject_drink', drink_id=drink.id)}}" onclick="return confirm('Oletko varma?')"><button class="btn btn-danger">Poista</button></a>
             </td>
         </tr>
         {% endfor %}

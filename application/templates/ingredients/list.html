@@ -22,8 +22,8 @@
       <td>{{ ingredient.unit }}</td>
       <td>
         {% if current_user.is_authenticated and current_user.role.name == "ADMIN" %}
-        <a href="{{url_for('ingredients_edit', ingredient_id=ingredient.id)}}"><button class="btn btn-primary">Muokkaa</button></a>
-        <a href="{{url_for('ingredients_delete', ingredient_id=ingredient.id)}}"><button class="btn btn-danger">Poista</button></a>
+        <a href="{{url_for('ingredients_edit', ingredient_id=ingredient.id)}}" class="btn btn-primary">Muokkaa</a>
+        <a href="{{url_for('ingredients_delete', ingredient_id=ingredient.id)}}" class="btn btn-danger" onclick="return confirm('Oletko varma?')">Poista</a>
         {% endif %}
       </td>
     </tr>
@@ -34,6 +34,6 @@
 {% include "pagination.html" %}
 
 <p>
-  <a href="/ingredients/new"><button class="btn btn-outline-success">Lisää uusi ainesosa</button></a>
+  <a href="/ingredients/new" class="btn btn-outline-success">Lisää uusi ainesosa</a>
 </p>
 {% endblock %}

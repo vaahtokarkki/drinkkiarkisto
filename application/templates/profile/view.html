@@ -27,7 +27,7 @@
             <td>
                 {% if current_user.is_authenticated and current_user.role.name == "ADMIN" %}
                 <a href="{{url_for('drinks_edit', drink_id=drink.id)}}"><button class="btn btn-primary">Muokkaa</button></a>
-                <a href="{{url_for('drinks_delete', drink_id=drink.id)}}"><button class="btn btn-danger">Poista</button></a></td>
+                <a href="{{url_for('drinks_delete', drink_id=drink.id)}}" onclick="return confirm('Oletko varma?')"><button class="btn btn-danger">Poista</button></a></td>
             {% endif %}
         </tr>
         {% endfor %}
@@ -36,6 +36,7 @@
 {% if current_user.is_authenticated and (current_user.id == user.id or current_user.role.name == "ADMIN") %}
 <p>
     <a href="{{ url_for('edit_user', profile_id=user.id) }}" class="btn btn-success">Muokkaa profiilia</a>
+    <a href="{{url_for('delete_user', profile_id=user.id)}}" onclick="return confirm('Oletko varma?')"><button class="btn btn-danger">Poista profiili</button></a>
 </p>
 {% endif %}
 {%endif%}
