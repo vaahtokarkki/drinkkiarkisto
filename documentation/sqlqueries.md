@@ -83,6 +83,7 @@ INSERT INTO keywords_helper (keyword_id, drink_id) VALUES (?, ?)
 INSERT INTO drink_ingredient (date_created, date_modified, amount, drink_id, ingredient_id) VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?)
 INSERT INTO drink_ingredient (date_created, date_modified, amount, drink_id, ingredient_id) VALUES (CURRENT_TIMESTAMP, CURRENT_TIMESTAMP, ?, ?, ?)
 ```
+Huom `INSERT INTO` `keywords_helper` ja `drink_ingredient` tauluihin tehtävien kyselyjen määrä riippuu kuinka monta ainesosaa ja avainsanaa drinkille lisätään.
 
 ## Lisää ainesosia ja avainsanoja
 **Lisää ainesosa**

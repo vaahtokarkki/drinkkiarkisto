@@ -29,7 +29,7 @@ Järjestelmään kirjaudutaan sisään, jos haluaa lisätä omia reseptejä. Tav
 * Järjestä lista nimen, tyypin tai ainesosan mukaan
 * Lisää resepti
 * Näytä omat reseptit
-* (Muokkaa omia reseptejä, vaatii ylläpidon hyväksynnän)
+* ~~Muokkaa omia reseptejä, vaatii ylläpidon hyväksynnän)~~
 
 ### Lisätoimintoja ylläpitäjälle
 * Hyväksy resepti arkistoon

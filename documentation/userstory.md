@@ -1,6 +1,8 @@
 # Drinkiarkiston käyttötapauksia
 [Käyttötapauksien SQL-kyselyt](sqlqueries.md)
 
+Yliviivatut käyttötapaukset ovat toteuttamattomia.
+
 ## Käyttäjänä haluan löytää hyviä drinkkejä ja jakaa omani
 
 #### Käyttäjänä haluan löytää helposti sopivan drinkin
