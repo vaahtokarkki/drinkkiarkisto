@@ -11,8 +11,12 @@ Ylläpitäjä:
 `käyttäjätunnus: admin`  
 `salasana: adminadmin`
 
->Toiminnallisuudessa voi olla tällä hetkellä pieniä puutteita, esimerkiksi uusia ainesosia ja drinkin reseptiä ei voi lisätä samalla lomakkeella. Myös osassa lomakkeiden (lähinnä lisää uusi drinkki) tietojen validoinnissa voi olla vielä aukkoja, johtuen wtform kirjaston hankaluudesta kun kenttiä on dynaaminen määrä.
+## Ajatuksia harjoitustyöstä
+Lähes kaikki suunnitellut käyttötapaukset on toteutettu ja sovelluksen käytettävyys on melko hyvä. Uuden drinkin lisäämiseen olisin halunnut samaan lomakkeeseen myös mahdollisuuden lisätä uusia ainesosia ja avainsanoja tietokantaa, jos niitä ei valikosta löydy valmiina. Tämä ei kuitenkaan ollut aivan yksinkertainen toteuttaa, joten jätin sen pois. Myös drinkin muokkaamiseen olisin halunnut mahdollisuuden poistaa ja lisätä ainesosia, mutta tässä oli vaikeuksia riippuvuuksien kanssa ja suurehko mahdollisuus rikkoa koko sovellus viime metreillä.
 
+Olen lopputulokseen kuitenkin tyytyväinen ja sain sovelluksesta kutakuinkin sellaisen mitä olin alun perin ajatellut.
+
+## Aihekuvaus
 Drinkkireseptit kuvaavat cocktaileja ja muita juomasekoituksia. Reseptejä voi hakea juoman nimeen liittyvällä hakusanalla, jonkin ainesosan tai drinkin tyypin (alkudrinkki, cocktail, shotti,jne) mukaan. Reseptejä voi tarkastella myös listana, aakkosjärjestyksen, ainesosan tai juoman tyypin mukaan. 
 
 Juomia hakiessa samalla hakusanalla voi saada useita eri tuloksia tai samaan juomaan voidaan viitata usealla hakusanalla. Jokaiseen drinkkiin voi viitata yksi tai useampi avainsana, esimerkiksi jos drinkki on tunnettu usealla nimellä, voi muut nimet olla drinkin avainsanoina. 
@@ -26,6 +30,7 @@ Järjestelmään kirjaudutaan sisään, jos haluaa lisätä omia reseptejä. Tav
 * Lisää resepti
 * Näytä omat reseptit
 * (Muokkaa omia reseptejä, vaatii ylläpidon hyväksynnän)
+
 ### Lisätoimintoja ylläpitäjälle
 * Hyväksy resepti arkistoon
 * Poista resepti
@@ -37,4 +42,5 @@ Järjestelmään kirjaudutaan sisään, jos haluaa lisätä omia reseptejä. Tav
 ## Dokumentaatio
 * [Asennus ja käyttöohjeet](documentation/install.md)
 * [Käyttötapaukset](documentation/userstory.md)
+* [Käyttötapauksien SQL-kyselyt](documentation/sqlqueries.md)
 * [Tietokannan dokumentaatio](documentation/database.md)

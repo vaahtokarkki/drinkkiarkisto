@@ -1,4 +1,5 @@
 # Drinkiarkiston käyttötapauksia
+[Käyttötapauksien SQL-kyselyt](sqlqueries.md)
 
 ## Käyttäjänä haluan löytää hyviä drinkkejä ja jakaa omani
 

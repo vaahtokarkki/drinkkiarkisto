@@ -130,3 +130,28 @@ DELETE FROM account WHERE account.id = ?
 ```SQL
 UPDATE account SET date_modified=CURRENT_TIMESTAMP, username=?, roles=? WHERE account.id = ?
 ```
+
+## Yhteenvetokyselyt
+**Luo TOP-5 listaus eniten drinkkejä lisänneistä käyttäjistä**
+```SQL
+SELECT account.id, COUNT(account.id) as drinkCount
+FROM account
+LEFT JOIN drink ON drink.account_id = account.id
+WHERE (drink.accepted = '1')
+GROUP BY account.id
+HAVING COUNT(drink.id) > 0
+ORDER BY drinkCount DESC
+LIMIT 5
+```
+
+**Hae keskimääräinen ainesosien määrä drinkissä**
+```SQL
+SELECT ROUND(AVG(count),2)
+FROM (
+SELECT COUNT(drink_ingredient.ingredient_id) as count
+FROM drink
+JOIN drink_ingredient on drink.id = drink_ingredient.drink_id
+WHERE (drink.accepted = '1')
+GROUP BY drink.id
+) AS result
+```
