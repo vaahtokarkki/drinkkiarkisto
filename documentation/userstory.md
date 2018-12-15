@@ -3,12 +3,14 @@
 ## Käyttäjänä haluan löytää hyviä drinkkejä ja jakaa omani
 
 #### Käyttäjänä haluan löytää helposti sopivan drinkin
+* Käyttäjänä haluan selata kaikkia drinkkjeä
 * Käyttäjänä haluan etsiä drinkkejä nimen perusteella
 * Käyttäjänä haluan etsiä drinkkejä ainesosien perusteella
-* Käyttäjänä haluan lajitella hakutuloksia eri kriteerein 
+* Käyttäjänä haluan etsiä drinkkejä avainsanojen perusteella
+* ~~Käyttäjänä haluan lajitella hakutuloksia eri kriteerein~~
 
 #### Käyttäjän haluan selata kaikkia drinkkejä
-* Käyttäjänä haluan lajitella drinkkejä eri kriteerein
+* ~~Käyttäjänä haluan lajitella drinkkejä eri kriteerein~~
 * Kirjautuneena käyttäjänä haluan selata omia drinkkejä
 
 #### Käyttäjänä haluan rekisteröityä palveluun, jotta voin lisätä drinkkejä 
