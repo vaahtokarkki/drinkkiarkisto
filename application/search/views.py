@@ -42,11 +42,18 @@ def search_drinks():
             ).all()
         return render_template("search/results.html", results=res, query=name)
 
-    results = Drink.query.filter(Drink.accepted == '1').filter(
-        Drink.name.contains(form.query.data) |
-        Drink.instructions.contains(form.query.data) |
-        Drink.ingredients.any(Ingredient.name.contains(form.query.data)) |
-        Drink.tags.any(Keyword.name.contains(form.query.data))
-        ).all()
+    stmt = text("SELECT DISTINCT drink.id, drink.name FROM drink"
+                " LEFT join drink_ingredient on drink_ingredient.drink_id = drink.id" 
+                " LEFT join ingredient on ingredient.id = drink_ingredient.ingredient_id"
+                " LEFT join keywords_helper on keywords_helper.drink_id = drink.id"
+                " LEFT join keyword on keyword.id = keywords_helper.keyword_id"
+                " WHERE drink.accepted = '1' and ("
+                " LOWER(drink.name) LIKE LOWER(:query) or"
+                " LOWER (drink.instructions) LIKE LOWER(:query) or"
+                " LOWER(ingredient.name) LIKE LOWER(:query) or"
+                " LOWER(keyword.name) LIKE LOWER(:query)"
+                " )"
+                " GROUP BY drink.id").params(query="%"+form.query.data+"%")
+    res = list(db.engine.execute(stmt))
 
-    return render_template("search/results.html", results=results, query=form.query.data)
+    return render_template("search/results.html", results=res, query=form.query.data)

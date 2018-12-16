@@ -31,12 +31,18 @@ SELECT * FROM keyword WHERE keyword.id = ? --Hae avainsana tulossivulle
 ### Hae drinkkejä hakusanalla
 
 ```SQL
-SELECT drink.id AS drink_id, drink.date_created AS drink_date_created, drink.date_modified AS drink_date_modified, drink.name AS drink_name, drink.instructions AS drink_instructions, drink.accepted AS drink_accepted, drink.account_id AS drink_account_id 
-FROM drink 
-WHERE drink.accepted = ? AND ((drink.name LIKE '%' || ? || '%') OR (drink.instructions LIKE '%' || ? || '%') OR (EXISTS (SELECT 1 FROM drink_ingredient, ingredient 
-WHERE drink.id = drink_ingredient.drink_id AND (ingredient.name LIKE '%' || ? || '%'))) OR (EXISTS (SELECT 1 
-FROM keywords_helper, keyword 
-WHERE drink.id = keywords_helper.drink_id AND keyword.id = keywords_helper.keyword_id AND (keyword.name LIKE '%' || ? || '%'))))
+SELECT DISTINCT drink.id, drink.name FROM drink
+LEFT join drink_ingredient on drink_ingredient.drink_id = drink.id
+LEFT join ingredient on ingredient.id = drink_ingredient.ingredient_id
+LEFT join keywords_helper on keywords_helper.drink_id = drink.id
+LEFT join keyword on keyword.id = keywords_helper.keyword_id
+WHERE drink.accepted = '1' and (
+LOWER(drink.name) LIKE LOWER(:query) or
+LOWER (drink.instructions) LIKE LOWER(:query) or
+LOWER(ingredient.name) LIKE LOWER(:query) or
+LOWER(keyword.name) LIKE LOWER(:query)
+)
+GROUP BY drink.id
 ```
 
 #### Listaa käyttäjän lisäämät drinkit
