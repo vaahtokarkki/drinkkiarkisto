@@ -1,10 +1,16 @@
 {% extends "layout.html" %}
   
 {% block body %}
-<form method="POST" action="{{ url_for('ingredients_save_edit', ingredient_id=ingredient.id) }}">
+{% if form is none %}
+<div class="alert alert-danger">
+    Ainesosaa ei löytynyt!
+</div>
+{%else%}
+<h3>Muokkaa ainesosaa {{form.name.data}}</h3>
+<form method="POST" action="{{ url_for('ingredients_save_edit', ingredient_id=ingredient.id) }}" style="margin-top:50px;">
     <div class="form-group row">
         <label for="name" class="col-sm-2 col-form-label">{{form.name.label}}</label>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
           {{form.name(class_="form-control")}}
         </div>
       </div>
@@ -25,7 +31,7 @@
     
       <div class="form-group row">
         <label for="username" class="col-sm-2 col-form-label">{{form.unit.label}}</label>
-        <div class="col-sm-8">
+        <div class="col-sm-4">
           {{form.unit(class_="form-control")}}
         </div>
       </div>
@@ -48,4 +54,5 @@
         <input type="submit" class="btn btn-success" value="Tallenna">
       </div>
 </form>
+{% endif %}
 {% endblock %}

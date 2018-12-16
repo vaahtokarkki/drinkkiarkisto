@@ -49,7 +49,15 @@ def ingredients_create():
 @app.route("/ingredients/edit/<ingredient_id>/", methods=["GET"])
 @login_required(role="ANY")
 def ingredients_edit(ingredient_id):
+    try:
+        int(ingredient_id)
+    except:
+        return render_template("ingredients/edit.html", form=None)
+
     ingredient = Ingredient.query.get(ingredient_id)
+
+    if ingredient is None:
+        return render_template("ingredients/edit.html", form=None)
 
     form = NewIngredientForm()
     form.name.data = ingredient.name

@@ -49,7 +49,15 @@ def keywords_create():
 @app.route("/keywords/edit/<keyword_id>/", methods=["GET"])
 @login_required(role=3)
 def keywords_edit(keyword_id):
+    try:
+        int(keyword_id)
+    except:
+        return render_template("keywords/edit.html", form=None)
+
     k = Keyword.query.get(keyword_id)
+
+    if k is None:
+        return render_template("keywords/edit.html", form=None)
 
     form = NewKeywordForm()
     form.name.data = k.name
