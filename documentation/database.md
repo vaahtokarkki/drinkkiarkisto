@@ -66,7 +66,7 @@ CREATE TABLE drink_ingredient (
     date_created DATETIME,
     date_modified DATETIME,
     id INTEGER NOT NULL,
-    amount INTEGER,
+    amount FLOAT,
     drink_id INTEGER,
     ingredient_id INTEGER,
     PRIMARY KEY (id),
