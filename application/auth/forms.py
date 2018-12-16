@@ -23,10 +23,9 @@ class EditForm(FlaskForm):
     name = StringField("Nimi", [validators.Length(min=5, max=20)], render_kw={"placeholder": "Nimi"})
     username = StringField("Käyttäjänimi",[validators.Length(min=2, max=20)],render_kw={"placeholder": "Käyttäjänimi"})
 
-    oldPassword = PasswordField("Nykyinen salasana",[validators.Length(min=6, max=30)], render_kw={"placeholder": "Nykyinen salasana"})
-
-    newPassword = PasswordField("Uusi salasana",[validators.Length(min=6, max=30)], render_kw={"placeholder": "Uusi salasana"})
-    newPasswordAgain = PasswordField("Uusi salasana uudestaan",[validators.Length(min=6, max=30)], render_kw={"placeholder": "Uusi salasana uudestaan"})
+    oldPassword = PasswordField("Nykyinen salasana", render_kw={"placeholder": "Nykyinen salasana"})
+    newPassword = PasswordField("Uusi salasana", render_kw={"placeholder": "Uusi salasana"})
+    newPasswordAgain = PasswordField("Uusi salasana uudestaan", render_kw={"placeholder": "Uusi salasana uudestaan"})
     
     def generateSelectOptions(): #Define function as workaround to get options visible on heroku... 
         rolesList = Role.query.all()

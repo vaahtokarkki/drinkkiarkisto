@@ -58,7 +58,6 @@ def edit_user_save(profile_id):
     user.username = form.username.data
 
     if form.newPassword.data:
-        print("chaning password")
         if user.password != form.oldPassword.data:
             form.oldPassword.errors.append("Väärä salasana")
             return render_template("profile/edit.html", form=form, profile=user)
@@ -67,6 +66,10 @@ def edit_user_save(profile_id):
             form.newPassword.errors.append("Salasanat eivät täsmää")
             return render_template("profile/edit.html", form=form, profile=user)
 
+        if len(form.newPassword.data) < 6 or len(form.newPassword.data) > 30:
+            form.newPassword.errors.append("Uuden salasanan pituuden on oltava vähintään 6 merkkiä ja enintää 30 merkkiä ")
+            return render_template("profile/edit.html", form=form, profile=user)
+            
         user.password = form.newPassword.data
 
     if current_user.role.name == "ADMIN":
