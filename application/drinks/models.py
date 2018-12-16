@@ -31,7 +31,7 @@ class Drink(Base):
 class DrinkIngredient(Base):
     __tablename__ = 'drink_ingredient'
     id = db.Column(db.Integer, primary_key=True)
-    amount = db.Column(db.Integer)
+    amount = db.Column(db.Float)
     drink_id = db.Column(db.Integer, db.ForeignKey(Drink.id))
     ingredient_id = db.Column(db.Integer, db.ForeignKey(Ingredient.id))
 
