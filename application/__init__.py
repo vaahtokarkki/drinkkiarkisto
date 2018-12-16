@@ -47,37 +47,29 @@ def login_required(role="ANY"):
         return decorated_view
     return wrapper
 
-from application import views
-
-from application.drinks import models
-from application.drinks import views
-
-from application.ingredients import models
-from application.ingredients import views
-
-from application.keywords import models
-from application.keywords import views
-
-from application.search import views
-
-from application.profile import views
-
-from application.admin import views
-
-from application.auth import models
-from application.auth import views
 from application.auth import role
+from application.ingredients import models
+from application.keywords import models
+from application.drinks import models
+from application.auth import models
+
+# Luodaan tarvittavat tietokantataulut
+db.create_all()
+
+from application import views
+from application.ingredients import views
+from application.keywords import views
+from application.search import views
+from application.admin import views
+from application.profile import views
+from application.drinks import views
+from application.auth import views
 
 # kirjautuminen
 from application.auth.models import User
 from os import urandom
 app.config["SECRET_KEY"] = urandom(32)
 
-
-
 @login_manager.user_loader
 def load_user(user_id):
     return User.query.get(user_id)
-
-# Luodaan lopulta tarvittavat tietokantataulut
-db.create_all()

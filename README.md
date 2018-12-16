@@ -12,7 +12,7 @@ Ylläpitäjä:
 `salasana: adminadmin`
 
 ## Ajatuksia harjoitustyöstä
-Lähes kaikki suunnitellut käyttötapaukset on toteutettu ja sovelluksen käytettävyys on melko hyvä. Uuden drinkin lisäämiseen olisin halunnut samaan lomakkeeseen myös mahdollisuuden lisätä uusia ainesosia ja avainsanoja tietokantaa, jos niitä ei valikosta löydy valmiina. Tämä ei kuitenkaan ollut aivan yksinkertainen toteuttaa, joten jätin sen pois. Myös drinkin muokkaamiseen olisin halunnut mahdollisuuden poistaa ja lisätä ainesosia, mutta tässä oli vaikeuksia riippuvuuksien kanssa ja suurehko mahdollisuus rikkoa koko sovellus viime metreillä.
+Lähes kaikki suunnitellut käyttötapaukset on toteutettu ja sovelluksen käytettävyys on melko hyvä. Uuden drinkin lisäämiseen olisin halunnut samaan lomakkeeseen myös mahdollisuuden lisätä uusia ainesosia ja avainsanoja tietokantaa, jos niitä ei valikosta löydy valmiina. Tämä ei kuitenkaan ollut aivan yksinkertainen toteuttaa, joten jätin sen pois. Drinkin luontilomakkeen validoinnissa myös häviää ainesosat, jos validointi ei mene läpi. Tämä johtuu, kun WTForms ei kunnolla tue dynaamisia lomakkeita, joten kenttien lisäys on tehty JavaScriptillä. Myös drinkin muokkaamiseen olisin halunnut mahdollisuuden poistaa ja lisätä ainesosia, mutta tässä oli vaikeuksia riippuvuuksien kanssa ja suurehko mahdollisuus rikkoa koko sovellus viime metreillä.
 
 Olen lopputulokseen kuitenkin tyytyväinen ja sain sovelluksesta kutakuinkin sellaisen mitä olin alun perin ajatellut.
 

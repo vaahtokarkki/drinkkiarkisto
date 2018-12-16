@@ -75,6 +75,10 @@ def drinks_create():
     
     d = Drink(name)
     d.instructions = instructions
+
+    # Purkkaviritelmä ainesosien tallentamiseen
+    # WTForms ei oikein tykkää, jos lomakkeen kenttien määrä ei ole
+    # tiedossa ennnen lähettämistä (eli käyttäjä voi lisätä niitä)  
     ingredientAmount = int(form.ingredientsAmount.data)
     for i in range(0, ingredientAmount+1):
         if i is 0:
@@ -174,7 +178,7 @@ def drinks_save_edit(drink_id):
         form.instructions.errors = list(form.instructions.errors)
         form.instructions.errors.append("Ohje saa olla enintään 200 merkkiä pitkä")
         valid = False
-
+ 
     for i in range(1,len(d.ingredients)+1):
         if d.ingredients[i-1].ingredient.unit == "":
             amount = None
