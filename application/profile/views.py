@@ -7,6 +7,11 @@ from application.auth.forms import EditForm
 
 @app.route("/profile/<profile_id>", methods=["GET"])
 def view_profile(profile_id):
+    try:
+        int(profile_id)
+    except:
+        return render_template("profile/view.html", user=None)
+
     p = User.query.get(profile_id)
 
     if p is None:

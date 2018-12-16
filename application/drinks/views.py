@@ -21,7 +21,16 @@ def drinks_index():
 
 @app.route("/drinks/<drink_id>", methods=["GET"])
 def get_drink(drink_id):
+    try:
+        int(drink_id)
+    except:
+        return render_template("drinks/drink.html", drink=None)
+
     d = Drink.query.get(drink_id)
+    
+    if d is None:
+        return render_template("drinks/drink.html", drink=None)
+        
     if d is not None and d.instructions:
         d.instructions = d.instructions.split('\n')
     return render_template("drinks/drink.html", drink=d)
@@ -130,6 +139,11 @@ def drinks_create():
 @app.route("/drinks/edit/<drink_id>/", methods=["GET"])
 @login_required(role=3)
 def drinks_edit(drink_id):
+    try:
+        int(drink_id)
+    except:
+        return render_template("drinks/edit.html", form=None)
+
     d = Drink.query.get(drink_id)
     if d is None:
         return render_template("drinks/edit.html", form=None)
@@ -189,6 +203,11 @@ def drinks_save_edit(drink_id):
 @app.route("/drinks/delete/<drink_id>/", methods=["GET"])
 @login_required(role=3)
 def drinks_delete(drink_id):
+    try:
+        int(drink_id)
+    except:
+        return redirect(url_for("drinks_index"))
+
     d = Drink.query.get(drink_id)
 
     if d is None:
@@ -201,6 +220,11 @@ def drinks_delete(drink_id):
 @app.route("/drinks/publish/<drink_id>", methods=["GET"])
 @login_required(role=3)
 def publish_drink(drink_id):
+    try:
+        int(drink_id)
+    except:
+        return redirect(url_for("admin_index"))
+
     d = Drink.query.get(drink_id)
 
     if d is None:
@@ -215,6 +239,11 @@ def publish_drink(drink_id):
 @app.route("/drinks/reject/<drink_id>", methods=["GET"])
 @login_required(role=3)
 def reject_drink(drink_id):
+    try:
+        int(drink_id)
+    except:
+        return redirect(url_for("admin_index"))
+
     d = Drink.query.get(drink_id)
     
     if d is None:
