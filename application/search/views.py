@@ -15,6 +15,12 @@ def search_drinks():
     # Search by ingredient
     if form.ingredient.data:
         id = form.ingredient.data
+
+        try:
+            int(id)
+        except:
+            return render_template("search/results.html", results=[], query=None)
+
         name = Ingredient.query.get(id)
         if name is not None:
             name = name.name
@@ -31,6 +37,12 @@ def search_drinks():
     # Search by keyword
     if form.keyword.data:
         id = form.keyword.data
+
+        try:
+            int(id)
+        except:
+            return render_template("search/results.html", results=[], query=None)
+
         name = Keyword.query.get(id)
         if name is not None:
             name = name.name

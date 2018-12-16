@@ -12,7 +12,7 @@ $ source venv/bin/activate
 $ pip install -r requirements.txt
 $ python3 run.py
 ```
-Sovelluksen ensimmäisellä käynnistyskerralla saattaa sovellus kaatua SQLAlchemyn virheeseen, jossa joitakin liitostauluja ei löydy. Sovelluksen pitäisi luoda itse tarvittavat taulut, jos niitä ei löydy kannasta. ~~Jostain syystä SQLAlchemy kuitenkin yrittää päästä käsiksi tauluun jota ei ole vielä luotu ja kaatuu siihen. Helpoiten tämän saa ohitettua ajamalla [dokumentaatiosta](database.md#create-table--lauseet) löytyvät `CREATE TABLE` lauseet itse tai vaihtoehtoisesti kommentoimalla koodia pois virheilmoitusten perusteella.~~ Sovelluksen *pitäisi* käynnistyä kaatumatta ja luoda tietokanta, jos sitä ei löydy.
+Sovelluksen ensimmäisellä käynnistyskerralla saattaa sovellus kaatua SQLAlchemyn virheeseen, jossa joitakin liitostauluja ei löydy. Sovelluksen pitäisi luoda itse tarvittavat taulut, jos niitä ei löydy kannasta. ~~Jostain syystä SQLAlchemy kuitenkin yrittää päästä käsiksi tauluun jota ei ole vielä luotu ja kaatuu siihen. Helpoiten tämän saa ohitettua ajamalla [dokumentaatiosta](database.md#create-table--lauseet) löytyvät `CREATE TABLE` lauseet itse tai vaihtoehtoisesti kommentoimalla koodia pois virheilmoitusten perusteella.~~ Sovelluksen *pitäisi* käynnistyä kaatumatta ja luoda tietokanta ensimmäisellä käynnistyskerralla.
 
 Nyt sovelluksen pitäisi olla käytettävissä osoitteessa ``localhost:5000``
 
